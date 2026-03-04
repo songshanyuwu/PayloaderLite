@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useAppContext } from '../App';
 import { t, getText } from '../i18n';
 import type { NavItem } from '../types';
@@ -12,10 +12,33 @@ interface TreeNodeProps {
   level: number;
   matchedIds: Set<string>;
   forceExpand: boolean;
+  expandLevel: ExpandLevel;
 }
 
-function TreeNode({ item, level, matchedIds, forceExpand }: TreeNodeProps) {
-  const [isExpanded, setIsExpanded] = useState(level < 2);
+function TreeNode({ item, level, matchedIds, forceExpand, expandLevel }: TreeNodeProps) {
+  const [isExpanded, setIsExpanded] = useState(() => {
+    // 初始展开状态根据 expandLevel 决定
+    if (expandLevel === 'collapsed') return false;
+    if (expandLevel === 'level1') return level === 0;
+    if (expandLevel === 'level2') return level <= 1;
+    return true;
+  });
+
+  // 监听 expandLevel 变化，更新展开状态
+  useEffect(() => {
+    if (expandLevel === 'collapsed') {
+      setIsExpanded(false);
+    } else if (expandLevel === 'web-expanded') {
+      // 只展开 Web应用攻防 一级分类，子分类保持折叠
+      setIsExpanded(level === 0 && item.id === 'web');
+    } else if (expandLevel === 'intranet-expanded') {
+      // 只展开内网渗透与横向移动一级分类，子分类保持折叠
+      setIsExpanded(level === 0 && item.id === 'intranet');
+    } else {
+      setIsExpanded(true);
+    }
+  }, [expandLevel, item.id, level]);
+
   const { selectedPayloadId, setSelectedPayloadId, selectedToolId, setSelectedToolId, language } = useAppContext();
 
   const hasChildren = item.children && item.children.length > 0;
@@ -25,8 +48,16 @@ function TreeNode({ item, level, matchedIds, forceExpand }: TreeNodeProps) {
   const isMatched = matchedIds.has(item.payloadId || item.toolId || '');
   const hasMatchedDescendant = hasChildren && hasDescendantMatch(item, matchedIds);
 
-  // Auto-expand when searching
-  const effectiveExpanded = forceExpand ? (hasMatchedDescendant || isMatched) : isExpanded;
+  // Auto-expand when searching or based on expandLevel
+  let effectiveExpanded = isExpanded;
+  if (forceExpand) {
+    effectiveExpanded = hasMatchedDescendant || isMatched;
+  }
+
+  // 在 web-expanded 或 intranet-expanded 模式下，强制收起子节点
+  if ((expandLevel === 'web-expanded' || expandLevel === 'intranet-expanded') && level > 0) {
+    effectiveExpanded = false;
+  }
 
   if (forceExpand && !isMatched && !hasMatchedDescendant && !hasChildren) {
     return null;
@@ -71,7 +102,7 @@ function TreeNode({ item, level, matchedIds, forceExpand }: TreeNodeProps) {
       {hasChildren && effectiveExpanded && (
         <div className="tree-children">
           {item.children!.map(child => (
-            <TreeNode key={child.id} item={child} level={level + 1} matchedIds={matchedIds} forceExpand={forceExpand} />
+            <TreeNode key={child.id} item={child} level={level + 1} matchedIds={matchedIds} forceExpand={forceExpand} expandLevel={expandLevel} />
           ))}
         </div>
       )}
@@ -92,8 +123,11 @@ interface SidebarProps {
   collapsed: boolean;
 }
 
+type ExpandLevel = 'collapsed' | 'web-expanded' | 'intranet-expanded' | 'all';
+
 function Sidebar({ collapsed }: SidebarProps) {
   const { activeTab, searchQuery, language } = useAppContext();
+  const [expandLevel, setExpandLevel] = useState<ExpandLevel>('level2');
   const data = activeTab === 'payloads' ? navigationData : toolNavigationData;
 
   // Compute matched IDs based on search query
@@ -144,6 +178,38 @@ function Sidebar({ collapsed }: SidebarProps) {
           )}
         </div>
         <div className="tree-container">
+          {!isSearching && activeTab === 'payloads' && (
+            <div className="expand-controls">
+              <button
+                className={`expand-btn ${expandLevel === 'collapsed' ? 'active' : ''}`}
+                onClick={() => setExpandLevel('collapsed')}
+                title="全部收起"
+              >
+                ◀
+              </button>
+              <button
+                className={`expand-btn ${expandLevel === 'web-expanded' ? 'active' : ''}`}
+                onClick={() => setExpandLevel('web-expanded')}
+                title="展开Web应用攻防"
+              >
+                Web
+              </button>
+              <button
+                className={`expand-btn ${expandLevel === 'intranet-expanded' ? 'active' : ''}`}
+                onClick={() => setExpandLevel('intranet-expanded')}
+                title="展开内网渗透与横向移动"
+              >
+                内网
+              </button>
+              <button
+                className={`expand-btn ${expandLevel === 'all' ? 'active' : ''}`}
+                onClick={() => setExpandLevel('all')}
+                title="全部展开"
+              >
+                ▶
+              </button>
+            </div>
+          )}
           {isSearching && matchCount === 0 ? (
             <div className="no-search-results">
               <span className="no-results-icon">🔍</span>
@@ -152,7 +218,7 @@ function Sidebar({ collapsed }: SidebarProps) {
             </div>
           ) : (
             data.map(item => (
-              <TreeNode key={item.id} item={item} level={0} matchedIds={matchedIds} forceExpand={isSearching} />
+              <TreeNode key={item.id} item={item} level={0} matchedIds={matchedIds} forceExpand={isSearching} expandLevel={expandLevel} />
             ))
           )}
         </div>
@@ -217,6 +283,40 @@ function Sidebar({ collapsed }: SidebarProps) {
           flex: 1;
           overflow-y: auto;
           padding: 8px 0;
+        }
+
+        .expand-controls {
+          display: flex;
+          gap: 4px;
+          padding: 8px 16px;
+          margin-bottom: 8px;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .expand-btn {
+          flex: 1;
+          background: var(--bg-tertiary);
+          border: 1px solid var(--border-color);
+          color: var(--text-muted);
+          padding: 6px 8px;
+          border-radius: 4px;
+          font-size: 11px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all var(--transition-fast);
+          text-align: center;
+        }
+
+        .expand-btn:hover {
+          border-color: var(--neon-cyan);
+          color: var(--neon-cyan);
+        }
+
+        .expand-btn.active {
+          background: rgba(0, 240, 255, 0.1);
+          border-color: var(--neon-cyan);
+          color: var(--neon-cyan);
+          box-shadow: 0 0 8px rgba(0, 240, 255, 0.2);
         }
 
         .no-search-results {
