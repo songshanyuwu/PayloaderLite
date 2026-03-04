@@ -29,10 +29,10 @@ function TreeNode({ item, level, matchedIds, forceExpand, expandLevel }: TreeNod
     if (expandLevel === 'collapsed') {
       setIsExpanded(false);
     } else if (expandLevel === 'web-expanded') {
-      // 只展开 Web应用攻防 一级分类，子分类保持折叠
+      // 只展开 Web应用攻防 一级分类，子分类由用户手动控制
       setIsExpanded(level === 0 && item.id === 'web');
     } else if (expandLevel === 'intranet-expanded') {
-      // 只展开内网渗透与横向移动一级分类，子分类保持折叠
+      // 只展开内网渗透与横向移动一级分类，子分类由用户手动控制
       setIsExpanded(level === 0 && item.id === 'intranet');
     } else {
       setIsExpanded(true);
@@ -52,11 +52,6 @@ function TreeNode({ item, level, matchedIds, forceExpand, expandLevel }: TreeNod
   let effectiveExpanded = isExpanded;
   if (forceExpand) {
     effectiveExpanded = hasMatchedDescendant || isMatched;
-  }
-
-  // 在 web-expanded 或 intranet-expanded 模式下，强制收起子节点
-  if ((expandLevel === 'web-expanded' || expandLevel === 'intranet-expanded') && level > 0) {
-    effectiveExpanded = false;
   }
 
   if (forceExpand && !isMatched && !hasMatchedDescendant && !hasChildren) {
@@ -166,6 +161,11 @@ function Sidebar({ collapsed }: SidebarProps) {
 
   const isSearching = searchQuery.trim().length > 0;
 
+  // 切换全部展开/折叠
+  const toggleExpandAll = () => {
+    setExpandLevel(prev => prev === 'all' ? 'collapsed' : 'all');
+  };
+
   return (
     <aside className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-content">
@@ -181,11 +181,11 @@ function Sidebar({ collapsed }: SidebarProps) {
           {!isSearching && activeTab === 'payloads' && (
             <div className="expand-controls">
               <button
-                className={`expand-btn ${expandLevel === 'collapsed' ? 'active' : ''}`}
-                onClick={() => setExpandLevel('collapsed')}
-                title="全部收起"
+                className={`expand-btn ${expandLevel === 'all' ? 'active' : ''}`}
+                onClick={toggleExpandAll}
+                title={expandLevel === 'all' ? '全部折叠' : '全部展开'}
               >
-                ◀
+                {expandLevel === 'all' ? '◀' : '▶'}
               </button>
               <button
                 className={`expand-btn ${expandLevel === 'web-expanded' ? 'active' : ''}`}
@@ -200,13 +200,6 @@ function Sidebar({ collapsed }: SidebarProps) {
                 title="展开内网渗透与横向移动"
               >
                 内网
-              </button>
-              <button
-                className={`expand-btn ${expandLevel === 'all' ? 'active' : ''}`}
-                onClick={() => setExpandLevel('all')}
-                title="全部展开"
-              >
-                ▶
               </button>
             </div>
           )}
