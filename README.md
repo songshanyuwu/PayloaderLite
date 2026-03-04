@@ -92,7 +92,7 @@
 
 ```bash
 # 1. 克隆项目
-git clone https://github.com/3516634930/Payloader.git
+git clone https://github.com/songshanyuwu/PayloaderLite.git
 cd Payloader
 
 # 2. 安装依赖
@@ -294,10 +294,10 @@ Payloader/
 │   ├── App.tsx                    # 入口 & 全局状态
 │   ├── main.tsx                   # React 挂载点
 │   ├── i18n/
-│   │   └── index.ts               # 国际化系统 (中/英)
+│   │   └── index.ts               # 国际化系统 (中/英)          更新模式名称，更准确
 │   ├── components/
-│   │   ├── Header.tsx             # 顶栏（主题/搜索/语言/变量）
-│   │   ├── Sidebar.tsx            # 侧边导航（树形/搜索过滤）
+│   │   ├── Header.tsx             # 顶栏（主题/搜索/语言/变量）  更新按钮位置，增加全局变量
+│   │   ├── Sidebar.tsx            # 侧边导航（树形/搜索过滤）    更新展开收起功能
 │   │   ├── MainContent.tsx        # 主内容路由
 │   │   ├── PayloadDetail.tsx      # 载荷详情（攻击链/复制/高亮）
 │   │   ├── ToolDetail.tsx         # 工具命令详情
@@ -305,7 +305,7 @@ Payloader/
 │   │   └── EncodingTools.tsx      # 编解码工具
 │   ├── data/
 │   │   ├── webPayloads.ts         # Web载荷数据（18,700+行）
-│   │   ├── intranetPayloads.ts    # 内网载荷数据（5,900+行）
+│   │   ├── intranetPayloads.ts    # 内网载荷数据（5,900+行）    更新{TARGET_IP}、{TARGET_CIDR}、{TARGET_DOMAIN}
 │   │   ├── toolCommands.ts        # 工具命令数据（3,800+行）
 │   │   └── navigation.ts         # 导航树定义
 │   ├── types/
@@ -382,7 +382,7 @@ It features **300+ curated payloads** across Web application security and intran
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/3516634930/Payloader.git
+git clone https://github.com/songshanyuwu/PayloaderLite.git
 cd Payloader
 
 # 2. Install dependencies
