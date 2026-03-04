@@ -11,7 +11,7 @@ const translations = {
   'header.themeToggleLight': { zh: '切换到暗色模式', en: 'Switch to Dark Mode' },
   'header.encoding': { zh: '🔐 编解码', en: '🔐 Codec' },
   'header.encodingTitle': { zh: '打开编解码工具', en: 'Open Encoding Tools' },
-  'header.modeLabel': { zh: '模式:', en: 'Mode:' },
+  'header.modeLabel': { zh: '渗透模式:', en: 'Pentest Mode:' },
   'header.modeNormal': { zh: '标准', en: 'Normal' },
   'header.modeWaf': { zh: 'WAF绕过', en: 'WAF Bypass' },
   'header.modeEdr': { zh: 'EDR免杀', en: 'EDR Evasion' },
