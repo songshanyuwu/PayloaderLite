@@ -14,9 +14,51 @@ function Header({ sidebarCollapsed, setSidebarCollapsed }: HeaderProps) {
   const [showEncoding, setShowEncoding] = useState(false);
 
   const updateVariable = (key: string, value: string) => {
-    setGlobalVariables(prev => 
-      prev.map(v => v.key === key ? { ...v, value } : v)
-    );
+    setGlobalVariables(prev => {
+      // 先保存原始的 TARGET_IP 值,避免在更新过程中被覆盖
+      const originalTargetIp = prev.find(v => v.key === 'TARGET_IP')?.value;
+      const originalTargetCidr = prev.find(v => v.key === 'TARGET_CIDR')?.value;
+      
+      const newVariables = prev.map(v => v.key === key ? { ...v, value } : v);
+
+      // 实现TARGET_IP和TARGET_CIDR的联动
+      if (key === 'TARGET_IP') {
+        // 当修改TARGET_IP时,自动更新TARGET_CIDR的网段部分
+        const targetCidrVar = newVariables.find(v => v.key === 'TARGET_CIDR');
+        if (targetCidrVar && originalTargetCidr) {
+          const ipParts = value.split('.');
+          if (ipParts.length === 4) {
+            // 提取前三段作为网段部分,并补齐.0
+            const networkPart = `${ipParts[0]}.${ipParts[1]}.${ipParts[2]}.0`;
+            // 保持原CIDR的掩码部分,只更新网段
+            const maskParts = originalTargetCidr.split('/');
+            const mask = maskParts.length > 1 ? maskParts[1] : '24';
+            targetCidrVar.value = `${networkPart}/${mask}`;
+          }
+        }
+      } else if (key === 'TARGET_CIDR') {
+        // 当修改TARGET_CIDR时,自动更新TARGET_IP的网段部分
+        const targetIpVar = newVariables.find(v => v.key === 'TARGET_IP');
+        if (targetIpVar && originalTargetIp) {
+          const cidrParts = value.split('/');
+          if (cidrParts.length === 2) {
+            const networkPart = cidrParts[0];
+            const networkSegments = networkPart.split('.');
+            // 确保网段部分是有效的(包含第四段)
+            if (networkSegments.length >= 3) {
+              // 从网段中提取前三段,保持TARGET_IP的第四段不变
+              const newNetwork = `${networkSegments[0]}.${networkSegments[1]}.${networkSegments[2]}`;
+              const ipParts = originalTargetIp.split('.');
+              if (ipParts.length === 4) {
+                targetIpVar.value = `${newNetwork}.${ipParts[3]}`;
+              }
+            }
+          }
+        }
+      }
+
+      return newVariables;
+    });
   };
 
   const toggleTheme = () => {
