@@ -40,6 +40,7 @@ export const useAppContext = () => {
 function App() {
   const [globalVariables, setGlobalVariables] = useState<GlobalVariable[]>([
     { key: 'TARGET_IP', value: '192.168.1.100', description: { zh: '目标IP地址', en: 'Target IP Address' } },
+    { key: 'TARGET_CIDR', value: '192.168.1.0/24', description: { zh: '目标网段', en: 'Target CIDR Block' } },
     { key: 'TARGET_DOMAIN', value: 'target.com', description: { zh: '目标域名', en: 'Target Domain' } },
     { key: 'ATTACKER_IP', value: '10.10.14.5', description: { zh: '攻击者IP', en: 'Attacker IP' } },
     { key: 'USERNAME', value: 'admin', description: { zh: '用户名', en: 'Username' } },
