@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { JSX } from 'react';
 import { useAppContext } from '../App';
 import { t, getText } from '../i18n';
 import type { SyntaxPart, I18nText } from '../types';
@@ -33,6 +34,53 @@ function ToolDetail({ toolId }: ToolDetailProps) {
     return result;
   };
 
+  /** Render command with variable highlights */
+  const renderCommandWithHighlights = (command: string) => {
+    const replaced = replaceVariables(command);
+    // Find variable positions and highlight them
+    let lastIdx = 0;
+    const regex = /\{([A-Z_]+)\}/g;
+    let match;
+    // Work on original command to find variable positions
+    const varPositions: { start: number; end: number; key: string; value: string }[] = [];
+    while ((match = regex.exec(command)) !== null) {
+      const varDef = globalVariables.find(v => v.key === match![1]);
+      if (varDef) {
+        varPositions.push({ start: match.index, end: match.index + match[0].length, key: match[1], value: varDef.value });
+      }
+    }
+
+    if (varPositions.length === 0) {
+      return <code>{replaced}</code>;
+    }
+
+    // Build replaced text with highlight spans
+    let replacedIdx = 0;
+    const elements: JSX.Element[] = [];
+    for (const vp of varPositions) {
+      // Text before variable
+      const beforeOrig = command.substring(lastIdx, vp.start);
+      if (beforeOrig.length > 0) {
+        elements.push(<span key={`t-${replacedIdx}`}>{beforeOrig}</span>);
+      }
+      // Variable replacement highlighted
+      elements.push(
+        <span key={`v-${replacedIdx}`} className="var-highlight" title={`\{${vp.key}\} → ${vp.value}`}>
+          {vp.value}
+        </span>
+      );
+      replacedIdx++;
+      lastIdx = vp.end;
+    }
+    // Remaining text
+    const remaining = command.substring(lastIdx);
+    if (remaining.length > 0) {
+      elements.push(<span key={`t-end`}>{remaining}</span>);
+    }
+
+    return <code>{elements}</code>;
+  };
+
   const copyToClipboard = async (text: string, index: string) => {
     const processedText = replaceVariables(text);
     await navigator.clipboard.writeText(processedText);
@@ -59,7 +107,7 @@ function ToolDetail({ toolId }: ToolDetailProps) {
         <div className="installation-section">
           <h3>{t('tool.installation', language)}</h3>
           <div className="code-block">
-            <code>{getText(tool.installation, language)}</code>
+            {renderCommandWithHighlights(getText(tool.installation, language))}
             <button 
               className={`copy-btn ${copiedIndex === 'install' ? 'copied' : ''}`}
               onClick={() => copyToClipboard(getText(tool.installation, language), 'install')}
@@ -86,7 +134,7 @@ function ToolDetail({ toolId }: ToolDetailProps) {
               <p className="command-desc">{getText(cmd.description, language)}</p>
               <div className="code-block-wrapper">
                 <div className="code-block">
-                  <code>{replaceVariables(cmd.command)}</code>
+                  {renderCommandWithHighlights(cmd.command)}
                 </div>
                 <div className="code-actions">
                   {cmd.syntaxBreakdown && cmd.syntaxBreakdown.length > 0 && (
