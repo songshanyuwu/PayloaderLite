@@ -198,6 +198,15 @@ input:focus, textarea:focus, select:focus {
   background: var(--neon-cyan);
 }
 
+.var-highlight {
+  background: rgba(0, 255, 136, 0.15);
+  color: var(--neon-green);
+  padding: 1px 4px;
+  border-radius: 3px;
+  border-bottom: 1px dashed var(--neon-green);
+  cursor: help;
+}
+
 .tag {
   display: inline-flex;
   align-items: center;
