@@ -178,7 +178,7 @@ function Sidebar({ collapsed }: SidebarProps) {
           )}
         </div>
         <div className="tree-container">
-          {!isSearching && activeTab === 'payloads' && (
+          {!isSearching && (
             <div className="expand-controls">
               <button
                 className={`expand-btn ${expandLevel === 'all' ? 'active' : ''}`}
@@ -187,20 +187,24 @@ function Sidebar({ collapsed }: SidebarProps) {
               >
                 {expandLevel === 'all' ? '◀' : '▶'}
               </button>
-              <button
-                className={`expand-btn ${expandLevel === 'web-expanded' ? 'active' : ''}`}
-                onClick={() => setExpandLevel('web-expanded')}
-                title="展开Web应用攻防"
-              >
-                Web
-              </button>
-              <button
-                className={`expand-btn ${expandLevel === 'intranet-expanded' ? 'active' : ''}`}
-                onClick={() => setExpandLevel('intranet-expanded')}
-                title="展开内网渗透与横向移动"
-              >
-                内网
-              </button>
+              {activeTab === 'payloads' && (
+                <>
+                  <button
+                    className={`expand-btn ${expandLevel === 'web-expanded' ? 'active' : ''}`}
+                    onClick={() => setExpandLevel('web-expanded')}
+                    title="展开Web应用攻防"
+                  >
+                    Web
+                  </button>
+                  <button
+                    className={`expand-btn ${expandLevel === 'intranet-expanded' ? 'active' : ''}`}
+                    onClick={() => setExpandLevel('intranet-expanded')}
+                    title="展开内网渗透与横向移动"
+                  >
+                    内网
+                  </button>
+                </>
+              )}
             </div>
           )}
           {isSearching && matchCount === 0 ? (
